@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar color="success">
+        <ion-buttons>
+            <ion-back-button slot="start" color="dark"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Cadastro</ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="success">
+
+    <div class="n1">
+        <ion-text>
+            <ion-icon name="settings"></ion-icon>
+            EasyCall
+        </ion-text>
+
+        <br><br>
+    </div>
+
+    <form (ngSubmit)="cadastrarUsuario()">
+        <ion-item color="success ">
+            <ion-label color="dark"><b>Name*</b></ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.nome" name="txtnome"></ion-input>
+        </ion-item>
+
+        <ion-item color="success">
+            <ion-label color="dark"><b>E-mail*</b></ion-label>
+            <ion-input type="E-mail" [(ngModel)]="usuario.email" name="txtemail"></ion-input>
+        </ion-item>
+
+        <ion-item color="success">
+            <ion-label color="dark"><b>Sennha*</b></ion-label>
+            <ion-input type="password" [(ngModel)]="usuario.senha" name="txtsenha"></ion-input>
+        </ion-item>
+
+        <ion-item color="success">
+            <ion-label color="dark"><b>Setor:</b></ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.setor" name="txtsetor"></ion-input>
+        </ion-item>
+
+        <ion-item color="success">
+            <ion-label color="dark"><b>Função:</b></ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.funcao" name="txtfuncao"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button type="submit" color="dark" expand="block" fill="outline">Cadastrar</ion-button>
+
+    </form>
+</ion-content>
