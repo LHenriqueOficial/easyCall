@@ -14,10 +14,24 @@ export class HomePagePage implements OnInit {
     public AlertCtrl :AlertController, public navCtrl : NavController) { }
 
   ngOnInit() {
+
+    this.fbauth.authState.subscribe(user=>{
+      if(user)
+      {
+        console.log("autenticado" + user.uid )
+      }
+      else
+      {
+        console.log("nao autenticado")
+      }
+    })
   }
+
+    
+
 showScreen(nomeDaPagina: string){
   this.navCtrl.navigateForward(nomeDaPagina)
-}
+};
 
   logOut(){
     this.fbauth.auth.signOut();

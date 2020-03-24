@@ -49,8 +49,21 @@ cadastrarUsuario(){
 
       /// autenticando o usuario apos autenticação 
 this.fbauth.auth.signInWithEmailAndPassword(this.usuario.email, this.usuario.senha).then(()=>{
-  // chama pagina de login 
-    this.showScreen('inicial-page');
+
+ this.fbauth.authState.subscribe(async users=>{
+   if(users)
+   {
+    const alert = await this.AlertCtrl.create({
+      header:'mensagem',
+      subHeader:'',
+      message:'usuario autenticado',
+      buttons:['Ok']
+    });
+    await alert.present();
+    this.showScreen('home-page');
+   }
+ })
+    
   });
   
       }).catch( async ()=>{
