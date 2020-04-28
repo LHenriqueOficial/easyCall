@@ -1,9 +1,54 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>abrirOsPage</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="success">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title stile="text-align: center;">Abrir O.S</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding" color="success">
+
+    <ion-item color="success">
+        <ion-input type="text" [(ngModel)]="ordem.nome" [value]="nomeUser"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-input type="text" [(ngModel)]="ordem.setor" [value]="setor"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-input type="text" [(ngModel)]="ordem.funcao" [value]="funcao"></ion-input>
+    </ion-item>
+
+    <ion-item color="success">
+        <ion-label style=" color: black;">
+            <ion-icon slot="start" name="skull"></ion-icon> Tipo de Falha</ion-label>
+        <ion-select style=" color: black;" okText="Ok" cancelText="Sair" [(ngModel)]="ordem.falha">
+            <ion-select-option *ngFor="let falha of falhas" [value]="falha.descricao">{{ falha.descricao }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item color="success">
+        <ion-label style=" color: black;">
+            <ion-icon slot="start" name="subway"></ion-icon>Equipamento</ion-label>
+        <ion-select style=" color: black;" okText="Ok" cancelText="Sair" [(ngModel)]="ordem.equipamento">
+            <ion-select-option *ngFor="let equipamento of equipamentos" [value]="equipamento.descricao">{{ equipamento.descricao }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item color="success">
+        <ion-input required type="text" [(ngModel)]="ordem.descricao" placeholder=" Descricao da Falha"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-icon name="calendar" color="dark">Data-Hora</ion-icon>
+        <ion-datetime required style=" color: black;" placeholder="Data e Hora de inicio" displayFormat="DD MMM, YYYY HH:mm " doneText="Ok" cancelText="Sair" monthShortNames="jan, Fev, Mar, Abr, Mai, Jun, Jul, Aug, Set, Out, Nov, Dez" [(ngModel)]="ordem.data"></ion-datetime>
+    </ion-item>
+
+
 
 </ion-content>
+
+<ion-footer color="success">
+    <ion-toolbar color="success">
+        <ion-button color="dark" (click)="saveOs()" expand="block">
+            Gerar O.S
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>

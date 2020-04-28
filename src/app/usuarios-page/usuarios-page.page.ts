@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuarios } from 'src/Model/Usuario';
+import { Usuarios } from 'src/app/model/Usuario';
 import { NavController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';

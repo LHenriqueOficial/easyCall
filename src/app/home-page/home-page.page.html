@@ -30,9 +30,20 @@
     <br>
     <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('relatorio-page')">Relatórios</ion-button>
     <br>
-    <ion-button fill="outline" expand="block" color="dark" (click)="logOut()">
-        <ion-icon name="backspace-sharp"></ion-icon>Sair
-    </ion-button>
+    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('equipamentos-page')">Cadastro Equipamentos</ion-button>
+    <br>
+    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('setor-page')">Cadastro Setor</ion-button>
+
+
+
 
 
 </ion-content>
+
+<ion-footer color="success">
+    <ion-toolbar color="success">
+        <ion-button expand="block" color="dark" (click)="logOut()">
+            <ion-icon name="backspace-sharp"></ion-icon>Sair
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>

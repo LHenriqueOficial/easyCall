@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>osManutencaopage</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="success">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>O.S Manutencao</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="success">
+    <ion-card *ngFor="let ordem of ordem">
+        <ion-item color="warning">
+
+            <ion-label>
+                <p>Nome Solicitante: {{ordem.nome}}</p>
+                <p>Setor: {{ordem.setor}}</p>
+                <p>Equipamento:{{ordem.equipamento}}</p>
+                <p>Falha: {{ordem.descricao}}</p>
+                <p>Hora Abertura: {{ordem.horaInicio | date:'dd-MM-yyyy HH:mm' }}</p>
+                <p>Hora Inicio: {{ordem.horaInicioExecucao | date:'dd-MM-yyyy HH:mm'}}</p>
+                <p>Hora Finalizacão: {{ordem.horaFinalizacao | date:'dd-MM-yyyy HH:mm'}}</p>
+                <p>Duração:{{ordem.tempoServico}} / minutos </p>
+                <p><b>Executante:</b>{{ordem.executante}}</p>
+                <p>Status: {{ordem.status}}</p>
+                <ion-button color="dark" [routerLink]="['/detalhes',ordem.id]">
+                    Abrir O.S
+                </ion-button>
+
+            </ion-label>
+            <br>
+        </ion-item>
+    </ion-card>
 
 </ion-content>

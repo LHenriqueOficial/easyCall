@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController, NavController } from '@ionic/angular';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { UsuarioService } from './../services/usuario.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,6 +10,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./home-page.page.scss'],
 })
 export class HomePagePage implements OnInit {
+  
 
   constructor(public fbauth: AngularFireAuth ,public fbstore:AngularFirestore, 
     public AlertCtrl :AlertController, public navCtrl : NavController) { }
@@ -18,7 +20,7 @@ export class HomePagePage implements OnInit {
     this.fbauth.authState.subscribe(user=>{
       if(user)
       {
-        console.log("autenticado" + user.uid )
+        console.log("autenticado" + user.uid  )
       }
       else
       {

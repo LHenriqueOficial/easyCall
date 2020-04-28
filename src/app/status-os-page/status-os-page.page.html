@@ -1,9 +1,31 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>statusOsPage</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="success">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Status O.S</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="success" padding>
+    <ion-card *ngFor="let ordem of ordem">
+        <ion-item color="warning">
+            <ion-label>
+                <br>
+                <p><b>Nome Solicitante:</b>{{ordem.nome}}</p>
+                <p><b>Setor:</b> {{ordem.setor}}</p>
+                <p><b>Equipamento:</b> {{ordem.equipamento}}</p>
+                <p><b>Falha:</b> {{ordem.descricao}}</p>
+                <p><b>Hora Abertura:</b> {{ordem.horaInicio | date:'dd-MM-yyyy HH:mm' }}</p>
+                <p><b>Data Inicio:</b> {{ordem.horaInicioExecucao | date:'dd-MM-yyyy HH:mm'}}</p>
+                <p><b>DataFinalizacão:</b> {{ordem.horaFinalizacao | date:'dd-MM-yyyy HH:mm'}} </p>
+                <p><b>Duração:</b> {{ordem.tempoServico}} / minutos </p>
+                <p><b>Executante:</b>{{ordem.executante}}</p>
+                <p><b>Status:</b> {{ordem.status}}</p>
+
+            </ion-label>
+        </ion-item>
+
+    </ion-card>
 
 </ion-content>

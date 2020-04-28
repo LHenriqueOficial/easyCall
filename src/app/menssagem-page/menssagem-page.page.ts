@@ -3,9 +3,9 @@ import { AlertController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Mensagens } from './../../Model/Mensagens';
+import { Mensagens } from '../model/Mensagens';
 import { Observable } from 'rxjs';
-import { Usuarios } from './../../Model/Usuario';
+import { Usuarios } from '../model/Usuario';
 import { element } from 'protractor';
 
 @Component({

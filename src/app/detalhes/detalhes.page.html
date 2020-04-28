@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-toolbar color="success">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title style="text-align: center;">O.S</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="success">
+
+
+    <ion-item color="success">
+        <ion-label><b>Nome Solicitane:</b> </ion-label>
+        <ion-input required type="text" [(ngModel)]="ordem.nome" [value]="ordem.nome"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-label><b>Setor:</b></ion-label>
+        <ion-input type="text" [(ngModel)]="ordem.setor" [value]="ordem.setor"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-label><b>Equipamento:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="ordem.equipamento" [value]="ordem.equipamento"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-label><b>Falha:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="ordem.descricao" [value]="ordem.descricao"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-icon name="calendar" color="dark"> </ion-icon>
+        <ion-label><b>Hora de Abertura: </b> </ion-label>
+        <ion-input type="text"> {{ ordem.horaInicio | date:'dd-MM-yyyy HH:mm'}}</ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-icon name="calendar" color="dark"></ion-icon>
+        <ion-label><b>Hora de Início:</b> </ion-label>
+        <ion-input lines="none" type="text"> {{ ordem.horaInicioExecucao | date:'dd-MM-yyyy HH:mm'}}</ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-icon name="calendar" color="dark"></ion-icon>
+        <ion-label><b>Termino:</b> </ion-label>
+        <ion-input lines="none" type="text">{{ordem.horaFinalizacao | date:'dd-MM-yyyy HH:mm'}}</ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-label><b>Executor:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="ordem.executante" [value]="nomeUser"></ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-icon name="timer" color="dark"></ion-icon>
+        <ion-label><b>Tempo de Execução:</b></ion-label>
+        <ion-input lines="none" type="text"> {{result}}/ minutos</ion-input>
+    </ion-item>
+    <ion-item color="success">
+        <ion-label><b>Status:</b> </ion-label>
+        <ion-input id="input" lines="none" required type="text" [(ngModel)]="ordem.status" [value]="ordem.status"></ion-input>
+        <ion-button (click)="finalizaOrdem()" expand="block " color="danger " [disabled]="valorBotao">
+            Finalizar O.S
+        </ion-button>
+    </ion-item>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="success">
+        <ion-grid>
+            <ion-row color="success">
+                <ion-col size="8" color="success">
+                    <ion-button routerLink="/os-manutencaopage" color="dark" expand=" block ">
+                        Voltar
+                    </ion-button>
+                </ion-col>
+
+                <ion-col size="4 ">
+                    <ion-button (click)="saveOrdem()" expand="block " color="dark " [disabled]="valorBotao2">
+                        Iniciar O.S
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+
+</ion-footer>

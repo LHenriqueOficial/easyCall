@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuarios } from 'src/Model/Usuario';
+import { Usuarios } from 'src/app/model/Usuario';
 import { NavController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -26,7 +26,7 @@ showScreen(nomeDaPagina: string){
 cadastrarUsuario(){
   // metodo para cadastrar usuarios
 
-  this.fbauth.auth.createUserWithEmailAndPassword(this.usuario.email, this.usuario.senha).then
+  const newUser = this.fbauth.auth.createUserWithEmailAndPassword(this.usuario.email, this.usuario.senha).then
   (result=>{
     let users = this.fbstore.collection("Usuarios")
     users.add({
@@ -44,7 +44,7 @@ cadastrarUsuario(){
         message:'Usuário Cadastardo com Sucesso',
         buttons:['Ok']
       });
-
+      console.log("sdffffffffffff" + newUser);
       await alert.present();
 
       /// autenticando o usuario apos autenticação 
