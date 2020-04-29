@@ -39,6 +39,8 @@ const routes: Routes = [
   },
   {path: 'detalhes/:id',loadChildren: () => import('./detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   },
+  {path: 'detalhes/:id/:equipamento',loadChildren: () => import('./detalhes/detalhes.module').then( m => m.DetalhesPageModule)
+  },
   {
     path: 'equipamentos-page',
     loadChildren: () => import('./equipamentos-page/equipamentos-page.module').then( m => m.EquipamentosPagePageModule)

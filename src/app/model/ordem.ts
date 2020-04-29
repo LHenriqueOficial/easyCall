@@ -1,4 +1,5 @@
 export class Ordem {
+    
     nome?: string;
     setor?: string;
     funcao?: string;
@@ -11,8 +12,10 @@ export class Ordem {
     horaFinalizacao?: number;
     executante?: string;
     status?: string;
-    tempoServico?: string;
-    cor?: string 
+    tempoServico?: number;
+    cor?: string;
+    tempoResposta?: number;
+
 
 
 }

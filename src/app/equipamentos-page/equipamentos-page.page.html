@@ -20,17 +20,20 @@
         </ion-select>
     </ion-item>
 
-    <ion-item *ngFor=" let equipamento of equipamentos" color="success">
-        <ion-label color="dark">{{equipamento.descricao}}</ion-label>
-        <ion-label color="dark">{{equipamento.setor}}</ion-label>
-
+    <ion-item color="success">
+        <ion-label style=" color: black;">
+            <ion-icon slot="end" name="subway"></ion-icon>Equipamento</ion-label>
+        <ion-select style=" color: black;" okText="Ok" cancelText="Sair" [(ngModel)]="equip.descricao">
+            <ion-select-option *ngFor="let equipamento of equipamentos" [value]="equipamento.descricao">{{ equipamento.descricao }}</ion-select-option>
+        </ion-select>
     </ion-item>
+
 
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar color="success">
-        <ion-button (click)="saveEquipamento()" expand="block" color="dark">
+    <ion-toolbar color="success ">
+        <ion-button (click)="saveEquipamento() " expand="block " color="dark ">
             Cadastrar Equipamento
         </ion-button>
     </ion-toolbar>

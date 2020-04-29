@@ -21,6 +21,7 @@ export class RelatorioPagePage implements OnInit {
   public orde: Ordem= {};
   lista:Array<Ordem>
   ordemList: any = []
+  list: Ordem={};
   pesquisa: string;
 
   constructor(
@@ -31,7 +32,7 @@ export class RelatorioPagePage implements OnInit {
   ) {
     this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
       this.ordem = data;
-      // this.carregadados();
+      this.carregadados();
     })
    }
 
@@ -43,11 +44,12 @@ export class RelatorioPagePage implements OnInit {
   carregadados() {
     let lista=this.db.collection<Ordem>("Ordem")
    
-     lista.ref.where("data", "==", '2020-03-09T15:43:42.218-03:00').get().then(res =>{
+     lista.ref.where("tempoServico", ">", "4").get().then(res =>{
       
       res.forEach(doc => {
         this.ordemList.push(doc.data())
         console.log(doc.id, ' => ' , doc.data())
+        console.log("eeeeeeeeeeeee" + this.ordemList.date)
       });
     })
   }

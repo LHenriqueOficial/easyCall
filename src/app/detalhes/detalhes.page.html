@@ -32,6 +32,11 @@
         <ion-input type="text"> {{ ordem.horaInicio | date:'dd-MM-yyyy HH:mm'}}</ion-input>
     </ion-item>
     <ion-item color="success">
+        <ion-icon name="timer" color="dark"></ion-icon>
+        <ion-label><b>Tempo de Resposta:</b></ion-label>
+        <ion-input lines="none" type="text"> {{ordem.tempoResposta}}/ minutos</ion-input>
+    </ion-item>
+    <ion-item color="success">
         <ion-icon name="calendar" color="dark"></ion-icon>
         <ion-label><b>Hora de Início:</b> </ion-label>
         <ion-input lines="none" type="text"> {{ ordem.horaInicioExecucao | date:'dd-MM-yyyy HH:mm'}}</ion-input>

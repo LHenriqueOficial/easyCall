@@ -22,7 +22,7 @@
                 <p>Duração:{{ordem.tempoServico}} / minutos </p>
                 <p><b>Executante:</b>{{ordem.executante}}</p>
                 <p>Status: {{ordem.status}}</p>
-                <ion-button color="dark" [routerLink]="['/detalhes',ordem.id]">
+                <ion-button color="dark" [routerLink]="['/detalhes',ordem.id,ordem.equipamento]">
                     Abrir O.S
                 </ion-button>
 
