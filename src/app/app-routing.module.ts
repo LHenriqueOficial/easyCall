@@ -31,6 +31,8 @@ const routes: Routes = [
   },
   {path: 'status-os-page',loadChildren: () => import('./status-os-page/status-os-page.module').then( m => m.StatusOsPagePageModule)
   },
+  {path: 'status-os-page/:equipamento',loadChildren: () => import('./status-os-page/status-os-page.module').then( m => m.StatusOsPagePageModule)
+  },
   {path: 'os-manutencaopage',loadChildren: () => import('./os-manutencaopage/os-manutencaopage.module').then( m => m.OsManutencaopagePageModule)
   },
   {path: 'relatorio-page',loadChildren: () => import('./relatorio-page/relatorio-page.module').then( m => m.RelatorioPagePageModule)
@@ -48,6 +50,22 @@ const routes: Routes = [
   {
     path: 'setor-page',
     loadChildren: () => import('./setor-page/setor-page.module').then( m => m.SetorPagePageModule)
+  },
+  {
+    path: 'relatorio-equipamentos',
+    loadChildren: () => import('./Relatorios/relatorio-equipamentos/relatorio-equipamentos.module').then( m => m.RelatorioEquipamentosPageModule)
+  },
+  {
+    path: 'relatorio-ordem',
+    loadChildren: () => import('./Relatorios/relatorio-ordem/relatorio-ordem.module').then( m => m.RelatorioOrdemPageModule)
+  },
+  {
+    path: 'relatorio-ordens',
+    loadChildren: () => import('./Relatorios/relatorio-ordens/relatorio-ordens.module').then( m => m.RelatorioOrdensPageModule)
+  },
+  {
+    path: 'manutencao',
+    loadChildren: () => import('./Pages/manutencao/manutencao.module').then( m => m.ManutencaoPageModule)
   }
 ];
 

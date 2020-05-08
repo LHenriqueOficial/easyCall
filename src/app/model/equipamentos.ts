@@ -2,6 +2,11 @@ export class Equipamentos {
     descricao?: string;
     setor?: string;
     tempo?:number;
-    qtdParada?: number = 0;
+    qtdParada?: number;
+    accResposta?:number;
+    disponibilidade?: number;
+
+    
+    
 
 }

@@ -14,6 +14,8 @@ import { OrdemService } from './../services/ordem.service';
 import { ActivatedRoute } from '@angular/router';
 import { EquipamentosService } from '../services/equipamentos.service';
 import { Equipamentos } from './../model/equipamentos';
+import { Contagem } from './../model/contagem';
+import { ContagemService } from './../services/contagem.service';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class AbrirOsPagePage implements OnInit {
   public usuario: Usuarios= {};
   public ordem: Ordem= {};
   public equipamento: Equipamentos={};
-  usuariomensagem: string
+  public contagem:Contagem={};
 
   private falhasSubscription: Subscription;
   private equipamentoSubscrible: Subscription;
@@ -40,12 +42,23 @@ export class AbrirOsPagePage implements OnInit {
   loading: any;
   ordemId: any;
   usuariot: any = []
+  equipList: any = []
+  equipId: any = null;
+  contaId: string = null;
+  tempoAcc: any;
+  public qtdParada: number;
+  public somaQtdPara: number = 1;
+  idconta: string;
+  public valorConta:number;
+  public contaespera: number;
+
 
 
   constructor(
     private falhaService: FalhaService,
     public fbauth: AngularFireAuth,
-    private equiService : EquipamentosService,
+    private equipServise : EquipamentosService,
+    private contaServise: ContagemService,
     public db : AngularFirestore,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
@@ -55,22 +68,28 @@ export class AbrirOsPagePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     ) { 
 
+     
+
       this.falhasSubscription= this.falhaService.getFalhas().subscribe(data =>{
         this.falhas = data;
         // console.log("kfljdlkfjfd" + this.falhas);
       });
 
-      this.equipamentoSubscrible = this.equiService.getEquipamentos().subscribe(data =>{
+      this.equipamentoSubscrible = this.equipServise.getEquipamentos().subscribe(data =>{
         this.equipamentos = data;
       })
       this.ordemId = this.activatedRoute.snapshot.params['id'];
 
     // if (this.ordemId) this.loadOrdem();
 
+    this.carregaValorContagem();
+
       
     }
  
   ngOnInit() {
+
+
     this.fbauth.authState.subscribe(user=>{
       if (user)
       
@@ -116,14 +135,48 @@ export class AbrirOsPagePage implements OnInit {
 //   });
 // }
 
+
 async saveOs(){
   await this.presentLoading();
   this.ordem.horaInicio = new Date().getTime();
   // .toISOString();;
 this.ordem.status = "Aguardando..."
+this.ordem.cor="danger"
+ let lista=this.db.collection<Equipamentos>("Equipamentos")
+ 
+   lista.ref.where("descricao", "==", this.ordem.equipamento).get().then(res =>{
+    
+    res.forEach(doc => {
+      this.equipList.push(doc.data())
+      console.log(doc.id, ' => ' , doc.data())
+      this.equipId = doc.id;
+      console.log("eeeeeeeeeeeee id do equipamento print 1" + this.equipId )  
+    });
+  })
+
+  let equip=this.db.collection("Equipamentos")
+   equip.ref.where("descricao", "==", this.ordem.equipamento).get().then(result=>{
+    result.forEach(element =>{
+      this.tempoAcc=element.data().tempo
+      this.qtdParada= element.data().qtdParada
+      // console.log("tempo de parada   " + this.tempoAcc)
+      // console.log("quantidade de parada  base de dados print 2  " + this.qtdParada)
+      // console.log("somando mais 1 para variavel  print 3 " + (this.qtdParada + this.somaQtdPara) ) 
+
+      this.equipamento.qtdParada = Number(this.qtdParada + this.somaQtdPara)
+      // soma numero de Ordem de serviço
+
+      this.equipService.updateEquipamento(this.equipId, this.equipamento)
+    })
+ })
+ 
   try {
     await this.ordemService.addOrdem(this.ordem);
-    
+    this.carregaContagem();
+    console.log("valor conta 2222  " + this.contagem.contaOs)
+    console.log("valor salvo com sucesso   ")
+
+
     await this.loading.dismiss();
 
     this.navCtrl.navigateBack('/status-os-page');
@@ -143,6 +196,37 @@ this.ordem.status = "Aguardando..."
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
+  }
+
+  carregaValorContagem(){
+    let conta=this.db.collection("Contagem")
+    conta.ref.where("id", "==", 1).get().then(result=>{
+     result.forEach(element =>{
+       this.valorConta=element.data().contaOs
+       this.contaespera=element.data().contaOsEmEspera
+       console.log("valor conta  " + this.valorConta)
+     })
+  })
+  }
+
+  carregaContagem(){
+    let lista=this.db.collection<Contagem>("Contagem")
+ 
+   lista.ref.where("id", "==", 1).get().then(res =>{
+    
+    res.forEach(doc => {
+      this.equipList.push(doc.data())
+      console.log(doc.id, ' => ' , doc.data())
+      this.contaId = doc.id;
+      this.contagem.contaOs = Number(this.valorConta + this.somaQtdPara)
+      console.log("testa contaOsEmEspera antes  " + this.contaespera )  
+      this.contagem.contaOsEmEspera = Number(this.contaespera + this.somaQtdPara)
+      console.log("testa contaOsEmEspera depois  " + this.contagem.contaOsEmEspera )  
+
+      this.contaServise.updateContagem(this.contaId, this.contagem)
+      
+    });
+  })
   }
   
 }

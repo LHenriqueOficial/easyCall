@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>Relatório Ordens</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+    <ion-card color="danger">
+        <ion-card-header>
+            <ion-card-title>
+                <h5><b></b></h5>
+            </ion-card-title>
+            <ion-item>
+
+                <ion-label>
+                    <h2><b>Ordem de Serviço Realizadas:</b></h2>{{valorConta}}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <h2><b>Acumulado Tempo de Resposta:</b></h2> {{calcTempo | number:0}}/ minutos</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <h2><b>Média para Tempo de Resposta:</b></h2>{{mediaResp | number:0}}/ minutos </ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label><b>Tempo Total Serviços:</b><br>{{valorTempoServico | number:0}}/ minutos</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label><b>Média Tempo de Serviço:</b><br>{{mediaServ | number:0 }}/ minutos</ion-label>
+            </ion-item>
+        </ion-card-header>
+        <ion-item color="danger">
+            <ion-button (click)="carregaOrdem('Finalizada')" expand="block" shape="round" color="success">
+                Os Realizadas / {{valorConta}}
+            </ion-button>
+        </ion-item>
+        <ion-item color="danger">
+            <ion-button (click)="carregaOrdem('Em execução')" expand="block" shape="round" size="small" color="warning">
+                Os Em Execução / {{contaExecucao}}
+            </ion-button>
+        </ion-item>
+        <ion-item color="danger">
+            <ion-button (click)="carregaOrdem('Aguardando')" expand="block" shape="round" color="danger">
+                Os Em Espera / {{contaAguarde}}
+            </ion-button>
+        </ion-item>
+    </ion-card>
+
+
+    <ion-card color="{{ordem.cor}}" *ngFor="let ordem of ordemList">
+        <ion-card-header>
+            <ion-card-subtitle></ion-card-subtitle>
+            <ion-card-title>{{ordem.equipamento}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-label>Data de Abertura </ion-label>{{ordem.horaInicio | date:'dd-MM-yyyy HH:mm' }}
+        </ion-card-content>
+    </ion-card>
+
+
+
+
+
+
+</ion-content>

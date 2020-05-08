@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="success">
-        <ion-buttons slot="end">
+        <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>Status O.S</ion-title>
@@ -9,7 +9,7 @@
 
 <ion-content color="success" padding>
     <ion-card *ngFor="let ordem of ordem">
-        <ion-item color="warning">
+        <ion-item color="{{ordem.cor}}">
             <ion-label>
                 <br>
                 <p><b>Nome Solicitante:</b>{{ordem.nome}}</p>

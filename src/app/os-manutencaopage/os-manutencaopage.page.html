@@ -9,7 +9,7 @@
 
 <ion-content color="success">
     <ion-card *ngFor="let ordem of ordem">
-        <ion-item color="warning">
+        <ion-item color="{{ordem.cor}}">
 
             <ion-label>
                 <p>Nome Solicitante: {{ordem.nome}}</p>

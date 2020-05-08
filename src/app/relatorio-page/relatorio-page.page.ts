@@ -8,6 +8,7 @@ import { firestore } from 'firebase';
 import * as firebase from 'firebase';
 import { FirebaseFirestore } from 'angularfire2';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-relatorio-page',
@@ -28,31 +29,25 @@ export class RelatorioPagePage implements OnInit {
     private db: AngularFirestore,
     private firestore: AngularFirestore,
     private ordemService : OrdemService,
+    private navCtrl: NavController
     
   ) {
     this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
       this.ordem = data;
-      this.carregadados();
+    
     })
    }
 
   ngOnInit() {
   }
 
+  showScreen(nomeDaPagina: string){
+    this.navCtrl.navigateForward(nomeDaPagina)
+  };
 
 
-  carregadados() {
-    let lista=this.db.collection<Ordem>("Ordem")
-   
-     lista.ref.where("tempoServico", ">", "4").get().then(res =>{
-      
-      res.forEach(doc => {
-        this.ordemList.push(doc.data())
-        console.log(doc.id, ' => ' , doc.data())
-        console.log("eeeeeeeeeeeee" + this.ordemList.date)
-      });
-    })
-  }
+
+  
  
 }
 

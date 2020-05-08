@@ -41,13 +41,11 @@
         <ion-datetime required style=" color: black;" placeholder="Data e Hora de inicio" displayFormat="DD MMM, YYYY HH:mm " doneText="Ok" cancelText="Sair" monthShortNames="jan, Fev, Mar, Abr, Mai, Jun, Jul, Aug, Set, Out, Nov, Dez" [(ngModel)]="ordem.data"></ion-datetime>
     </ion-item>
 
-
-
 </ion-content>
 
 <ion-footer color="success">
     <ion-toolbar color="success">
-        <ion-button color="dark" (click)="saveOs()" expand="block">
+        <ion-button color="dark" (click)="saveOs()" [routerLink]="['/status-os-page',ordem.equipamento]" expand="block">
             Gerar O.S
         </ion-button>
     </ion-toolbar>

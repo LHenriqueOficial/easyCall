@@ -1,38 +1,31 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
         <ion-title>relatorioPage</ion-title>
     </ion-toolbar>
 </ion-header>
-
-<ion-content color="success">
-    <ion-button (click)="carregadados()" expand="block" fill="clear" shape="round">
-        Click me
-    </ion-button>
-
-    <ion-item *ngFor="let ordemlist of ordemList">
-        <ion-input type="text">{{ordemlist.falha}}</ion-input>
-    </ion-item>
-    <ion-item color="success" *ngFor="let ordemlist of ordemList">
-        <ion-input type="text">{{ordemlist.setor}}</ion-input>
-    </ion-item>
-    <ion-item color="success">
-        <ion-input type="text" [(ngModel)]="pesquisa"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label>{{pesquisa}}</ion-label>
-    </ion-item>
+<ion-content>
 
     <ion-card router-direction="back" color="danger">
         <img src="./assets\icon\date.png" />
         <ion-card-header>
-            <ion-card-title>Relatório por Data </ion-card-title>
+            <ion-item color="danger">
+                <ion-button color="dark" expand="block"> Relatório por Data
+                </ion-button>
+            </ion-item>
         </ion-card-header>
     </ion-card>
     <br>
     <ion-card router-direction="back" color="danger">
         <img src="./assets\icon\furadeira.png" />
+        <img src="./assets\icon\grafico.png" />
         <ion-card-header>
-            <ion-card-title>Equipamento e Data </ion-card-title>
+            <ion-item color="danger">
+                <ion-button color="dark" expand="block" (click)="showScreen('relatorio-equipamentos')"> Equipamentos
+                </ion-button>
+            </ion-item>
         </ion-card-header>
     </ion-card>
 
@@ -40,16 +33,20 @@
     <ion-card router-direction="back" color="danger">
         <img src="./assets\icon\users.png" />
         <ion-card-header>
-            <ion-card-title>Ordem de serviço </ion-card-title>
+            <ion-item color="danger">
+                <ion-button color="dark" expand="block" (click)="showScreen('relatorio-ordens')"> Relatório de Ordem de Serviços
+                </ion-button>
+            </ion-item>
         </ion-card-header>
     </ion-card>
 
     <br>
     <ion-card router-direction="back" color="danger">
         <img src="./assets\icon\setor.png" />
-        <ion-card-header>
-            <ion-card-title>Setor </ion-card-title>
-        </ion-card-header>
+        <ion-item color="danger">
+            <ion-button color="dark" expand="block"> Relatório por Setor
+            </ion-button>
+        </ion-item>
     </ion-card>
 
 </ion-content>

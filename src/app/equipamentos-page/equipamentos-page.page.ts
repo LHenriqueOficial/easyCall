@@ -81,8 +81,11 @@ export class EquipamentosPagePage implements OnInit {
     } else {
       // this.equipamento.createdAt = new Date().getTime();
      
-      this.equip.tempo="..."
+      
       try {
+        this.equip.qtdParada =0;
+        this.equip.tempo=0;
+        this.equip.accResposta=0;
         await this.equiService.addequipamento(this.equip);
         this.equip.descricao ="";
         this.setor.descricao="";
@@ -95,7 +98,6 @@ export class EquipamentosPagePage implements OnInit {
       }
     }
   }
-
 
 
   async presentLoading() {

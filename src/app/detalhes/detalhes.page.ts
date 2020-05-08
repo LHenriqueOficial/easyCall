@@ -9,6 +9,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Equipamentos } from './../model/equipamentos';
 import { EquipamentosService } from '../services/equipamentos.service';
+import { element } from 'protractor';
+import { Contagem } from '../model/contagem';
+import { ContagemService } from './../services/contagem.service';
 
 @Component({
   selector: 'app-detalhes',
@@ -20,8 +23,8 @@ export class DetalhesPage implements OnInit {
   private loading: any;
   private ordem: Ordem = {};
   public equipament = new Array<Equipamentos>();
-
   private equipamento: Equipamentos={};
+  public contagem:Contagem={};
   ordemId: string= null;
   nomeEquip: string= null;
   equipId : string =null;
@@ -29,7 +32,7 @@ export class DetalhesPage implements OnInit {
  
 
   private ordemSubscription: Subscription;
-  private equpamentoSubscription: Subscription;
+  private equipamentoSubscription: Subscription;
   nomeUser: any;
   setor: any;
   funcao: any;
@@ -41,6 +44,12 @@ export class DetalhesPage implements OnInit {
   valorBotao2: any;
   tempoAcc: number;
   qtdParada: any;
+  accResp: any;
+  contaId: string;
+  valorConta: number;
+  contaespera: number;
+  subtraiOs: number =1;
+  contaexecucao:number;
   
 
   constructor(
@@ -54,6 +63,7 @@ export class DetalhesPage implements OnInit {
     private db : AngularFirestore,
     private toastCtrl: ToastController,
     private navCtrl: NavController,
+    private contaServise: ContagemService
   ) {
 
     this.ordemId = this.activatedRoute.snapshot.params['id'];
@@ -62,6 +72,8 @@ export class DetalhesPage implements OnInit {
     // this.loadEquipamento();
     this.carregaDados();
     this.carregaTime();
+    this.carregaValorContagem()
+    this.carregaContagem()
      
    }
 
@@ -142,6 +154,7 @@ carregaDados() {
       console.log(doc.id, ' => ' , doc.data())
       this.equipId = doc.id;
       console.log("eeeeeeeeeeeee" + this.equipId+ " tempo ")  
+      
     });
   })
 }
@@ -152,9 +165,10 @@ carregaTime(){
     result.forEach(element =>{
       this.tempoAcc=element.data().tempo
       this.qtdParada= element.data().qtdParada
-      console.log("tempo de parada   " + this.tempoAcc)
-      console.log("quantidade de parada   " + this.qtdParada)
-      console.log("calculo minuto "+ (this.tempoAcc / 1000)/60)   
+      this.accResp= element.data().accResposta
+      // console.log("tempo de parada   " + this.tempoAcc)
+      // console.log("quantidade de parada   " + this.qtdParada)
+      // console.log("calculo minuto "+ (this.tempoAcc / 1000)/60)   
     })
  })
 
@@ -166,11 +180,17 @@ carregaTime(){
     if(this.ordemId){
       try{
         this.ordem.horaInicioExecucao = new Date().getTime();
-        this.ordem.status =' Em execução'
+        this.ordem.status ='Em execução'
+        this.ordem.cor = 'warning'
         this.ordem.tempoResposta = this.result;
+        this.equipamento.accResposta = this.accResp + Number(this.result)
+        this.contagem.contaOsEmEspera = Number(this.contaespera - this.subtraiOs)
+        this.contagem.contaOsExecucao = Number(this.contaexecucao + this.subtraiOs)
+      this.contaServise.updateContagem(this.contaId, this.contagem)
         await this.ordemService.updateOrdem(this.ordemId, this.ordem);
-        await this.loading.dismiss();
+        this.equipServise.updateEquipamento(this.equipId, this.equipamento);
 
+        await this.loading.dismiss();
         this.navCtrl.navigateBack('/os-manutencaopage')
       }catch(error){
         this.presentToast('Erro ao tentar salvar os dados')
@@ -186,12 +206,13 @@ carregaTime(){
     if(this.ordemId){
       try{
         this.ordem.horaFinalizacao = new Date().getTime();
-        this.ordem.status =' Finalizada'
+        this.ordem.status ='Finalizada'
+        this.ordem.cor ='success'
         this.ordem.tempoServico = this.result
         await this.ordemService.updateOrdem(this.ordemId, this.ordem);
-
         this.equipamento.tempo = this.tempoAcc + Number(this.result);
-        this.equipamento.qtdParada = (this.qtdParada + this.comparador);
+        this.contagem.contaOsExecucao = Number(this.contaexecucao - this.subtraiOs)
+      this.contaServise.updateContagem(this.contaId, this.contagem)
         // var numberValue = Number(stringToConvert);
         this.equipServise.updateEquipamento(this.equipId, this.equipamento);
         await this.loading.dismiss();
@@ -213,6 +234,33 @@ carregaTime(){
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
+  }
+
+  carregaValorContagem(){
+    let conta=this.db.collection("Contagem")
+    conta.ref.where("id", "==", 1).get().then(result=>{
+     result.forEach(element =>{
+       this.valorConta=element.data().contaOs
+       this.contaespera=element.data().contaOsEmEspera
+       this.contaexecucao=element.data().contaOsExecucao
+       console.log("valor conta  " + this.valorConta)
+     })
+  })
+  }
+
+  carregaContagem(){
+    let lista=this.db.collection<Contagem>("Contagem")
+ 
+   lista.ref.where("id", "==", 1).get().then(res =>{
+    
+    res.forEach(doc => {
+      this.equipList.push(doc.data())
+      console.log(doc.id, ' => ' , doc.data())
+      this.contaId = doc.id;
+      // console.log("eeeeeeeeeeeee id do equipamento print 1 " + this.contaId )  
+      
+    });
+  })
   }
 
 }

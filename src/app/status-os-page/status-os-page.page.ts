@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { StatusOs } from './../model/status-os';
 import { StatusOsService } from './../services/status-os.service';
 import { Ordem } from '../model/ordem';
+import { Equipamentos } from '../model/equipamentos';
+import { EquipamentosService } from '../services/equipamentos.service';
 
 @Component({
   selector: 'app-status-os-page',
@@ -18,11 +20,21 @@ import { Ordem } from '../model/ordem';
 export class StatusOsPagePage implements OnInit {
 
   private statusOsSubscription: Subscription;
-  private ordemSubscription: Subscription
-
+  private ordemSubscription: Subscription;
+  private equipamentoSubscription: Subscription
+   private equipamentoSubscrible: Subscription
+  public equipamento: Equipamentos={};
+  
+  nomeEquip: string= null;
   public statusOs = new Array<StatusOs>();
+  public equipamentos = new Array<Equipamentos>();
   public ordem = new Array<Ordem>();
   public cor:any =" dark";
+  qtdParada: any;
+  tempoAcc: any;
+  equipId: string;
+  equipList: any = []
+  somaQtd: number =1;
 
   constructor(
     private falhaService: FalhaService,
@@ -32,6 +44,7 @@ export class StatusOsPagePage implements OnInit {
     private toastCtrl: ToastController,
     private ordemService: OrdemService,
     private statusService: StatusOsService,
+    private equipServise: EquipamentosService,
     private navCtrl: NavController,
     private activatedRoute: ActivatedRoute,
   ) { 
@@ -41,14 +54,71 @@ export class StatusOsPagePage implements OnInit {
     this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
       this.ordem = data;
     })
+    
+    this.equipamentoSubscrible = this.equipServise.getEquipamentos().subscribe(data =>{
+      this.equipamentos = data;
+    })
+
   }
 
   ngOnInit() {
+
+  
 
 
   }
   ngOnDestroy() {
     if (this.ordemSubscription) this.ordemSubscription.unsubscribe();
+    if(this.equipamentoSubscription) this.equipamentoSubscription.unsubscribe();
+  }
+
+  carregaDados() {
+    let lista=this.db.collection<Equipamentos>("Equipamentos")
+   
+     lista.ref.where("descricao", "==", this.nomeEquip).get().then(res =>{
+      
+      res.forEach(doc => {
+        this.equipList.push(doc.data())
+        console.log(doc.id, ' => ' , doc.data())
+        this.equipId = doc.id;
+        console.log("eeeeeeeeeeeee" + this.equipId+ " tempo ")  
+      });
+    })
+  }
+  
+  carregaQtdParadaEquip(){
+    let equip=this.db.collection("Equipamentos")
+     equip.ref.where("descricao", "==", this.nomeEquip).get().then(result=>{
+      result.forEach(element =>{
+        this.tempoAcc=element.data().tempo
+        this.qtdParada= element.data().qtdParada
+        // console.log("tempo de parada   " + this.tempoAcc)
+        console.log("quantidade de parada dase de dados   " + this.qtdParada)
+        // console.log("calculo minuto "+ (this.tempoAcc / 1000)/60)   
+      })
+   })
+  
+  }
+
+  async atualizaEquipamento(){
+    console.log("quantidade de parada dentro do atualiza   " + this.qtdParada)
+
+    
+      try{
+        this.equipamento.qtdParada = (this.qtdParada + this.somaQtd);
+        // var numberValue = Number(stringToConvert);
+      //  await this.equipServise.updateEquipamento(this.equipId, this.equipamento);
+        
+        this.navCtrl.navigateBack('/os-manutencaopage')
+      }catch(error){
+        this.presentToast('Erro ao tentar salvar os dados')
+       
+      }
+
+  }
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    toast.present();
   }
 
   
