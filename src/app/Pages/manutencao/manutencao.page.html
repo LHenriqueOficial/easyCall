@@ -1,9 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>manutencao</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title color="success">Manutencao</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="success">
+
+    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('relatorio-page')">Relatórios</ion-button>
+    <br>
+    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('equipamentos-page')">Cadastro Equipamentos</ion-button>
+    <br>
+    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('setor-page')">Cadastro Setor</ion-button>
 
 </ion-content>

@@ -21,7 +21,7 @@ import { ContagemService } from './../services/contagem.service';
 export class DetalhesPage implements OnInit {
 
   private loading: any;
-  private ordem: Ordem = {};
+  public ordem: Ordem = {};
   public equipament = new Array<Equipamentos>();
   private equipamento: Equipamentos={};
   public contagem:Contagem={};

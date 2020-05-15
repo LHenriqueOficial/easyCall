@@ -28,6 +28,7 @@ export class RelatorioOrdensPage implements OnInit {
   valorTempoServico: number=0;
   mediaServ: string;
   modelo:string;
+  calculoTempo: string;
 
 
 
@@ -90,9 +91,12 @@ calcTempoResposta(){
    res.forEach(element => {
     console.log("consulta " + element.data().tempoResposta )  
     this.valorTempoServico += Number(element.data().tempoServico)
-    this.calcTempo += Number(element.data().tempoResposta) 
+    this.calcTempo += Number(element.data().tempoResposta)
+    this.calculoTempo = this.calcTempo.toFixed(2);
      this.mediaResp = Number(this.calcTempo / this.valorConta).toFixed(2)
+
      this.mediaServ = Number(this.valorTempoServico / this.valorConta).toFixed(2)
+
      this.soma = Number((element.data().horaInicio - element.data().horaFinalização)/ 1000 /60).toFixed(2)
      console.log("teste contagem "+ this.soma )
    });

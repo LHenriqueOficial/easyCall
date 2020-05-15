@@ -4,6 +4,7 @@ import { Equipamentos } from 'src/app/model/equipamentos';
 import { EquipamentosService } from 'src/app/services/equipamentos.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { async } from '@angular/core/testing';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-relatorio-equipamentos',
@@ -15,6 +16,7 @@ export class RelatorioEquipamentosPage implements OnInit {
  public equipamentos = new Array<Equipamentos>();
  listaequipamento:Observable<Equipamentos[]>
  ordemList: any = []
+  tempodeParada: any=[]
 
 
 
@@ -56,6 +58,14 @@ export class RelatorioEquipamentosPage implements OnInit {
         console.log(doc.id, ' => ' , doc.data())
       
       });
+      res.forEach(element =>{
+
+        this.tempodeParada = element.data().tempo.toFixed(2)
+      
+        console.log("teste elemento" + this.tempodeParada)
+
+
+      })
     })
   }
 
