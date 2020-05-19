@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="success">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button color="dark"></ion-back-button>
         </ion-buttons>
-        <ion-title color="success">Manutencao</ion-title>
+        <ion-title color="success">Manutencão</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -11,8 +11,16 @@
 
     <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('relatorio-page')">Relatórios</ion-button>
     <br>
+    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('os-manutencaopage')">Os de Manutenção</ion-button>
+    <br>
     <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('equipamentos-page')">Cadastro Equipamentos</ion-button>
     <br>
     <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('setor-page')">Cadastro Setor</ion-button>
+    <br>
+    <ion-button color="dark" expand="block" (click)="showScreen('area')">Casdastro de Area</ion-button>
+    <br>
+    <ion-button color="dark" expand="block" (click)="showScreen('disponibilidade')">Gestão de Disponibilidade</ion-button>
+    <br>
+
 
 </ion-content>

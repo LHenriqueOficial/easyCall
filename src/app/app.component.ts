@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { bindCallback } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-root',
@@ -11,27 +13,29 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
+  
   public appPages = [
     {
-      title: 'Inbox',
-      url: '/folder/Inbox',
-      icon: 'mail'
+      title: 'Pagina Inicial',
+      url: '/home-page',
+      icon: 'home',
     },
-    // {
-    //   title: 'Outbox',
-    //   url: '/folder/Outbox',
-    //   icon: 'paper-plane'
-    // },
-    // {
-    //   title: 'Favorites',
-    //   url: '/folder/Favorites',
-    //   icon: 'heart'
-    // },
-    // {
-    //   title: 'Archived',
-    //   url: '/folder/Archived',
-    //   icon: 'archive'
-    // },
+    {
+      title: 'Abrir Ordem de Serviço',
+      url: '/abrir-os-page',
+      icon: 'newspaper'
+    },
+    {
+      title: 'Mensagens Usuários',
+      url: '/menssagem-page',
+      icon: 'send',
+      
+    },
+    {
+      title: 'Status Ordem de Serviço',
+      url: '/status-os-page',
+      icon: 'git-compare'
+    },
     // {
     //   title: 'Trash',
     //   url: '/folder/Trash',
@@ -48,7 +52,10 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private fbauth: AngularFireAuth,
+    public navCtrl : NavController
+
   ) {
     this.initializeApp();
   }
@@ -65,5 +72,10 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+  }
+
+  logOut(){
+    this.fbauth.auth.signOut();
+    this.navCtrl.navigateForward('inicial-page')
   }
 }

@@ -63,9 +63,6 @@ export class StatusOsPagePage implements OnInit {
 
   ngOnInit() {
 
-  
-
-
   }
   ngOnDestroy() {
     if (this.ordemSubscription) this.ordemSubscription.unsubscribe();
@@ -109,7 +106,6 @@ export class StatusOsPagePage implements OnInit {
         // var numberValue = Number(stringToConvert);
       //  await this.equipServise.updateEquipamento(this.equipId, this.equipamento);
         
-        this.navCtrl.navigateBack('/os-manutencaopage')
       }catch(error){
         this.presentToast('Erro ao tentar salvar os dados')
        
@@ -120,6 +116,10 @@ export class StatusOsPagePage implements OnInit {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
   }
+
+  showScreen(nomeDaPagina: string){
+    this.navCtrl.navigateForward(nomeDaPagina)
+  };
 
   
 }

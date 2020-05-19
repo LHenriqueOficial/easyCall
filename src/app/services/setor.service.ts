@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Setor } from './../model/setor';
+import { Setor } from '../model/areadeTrabalho';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 
@@ -37,8 +37,8 @@ export class SetorService {
     return this. setorCollection.doc<Setor>(id).valueChanges();
   }
 
-  updateSetor(id: string, equipamento: Setor) {
-    return this. setorCollection.doc<Setor>(id).update(equipamento);
+  updateSetor(id: string, setor: Setor) {
+    return this. setorCollection.doc<Setor>(id).update(setor);
   }
 
   deleteSetor(id: string) {

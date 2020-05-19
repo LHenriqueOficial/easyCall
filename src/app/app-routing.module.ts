@@ -66,7 +66,16 @@ const routes: Routes = [
   {
     path: 'manutencao',
     loadChildren: () => import('./Pages/manutencao/manutencao.module').then( m => m.ManutencaoPageModule)
-  }
+  },
+  {
+    path: 'disponibilidade',
+    loadChildren: () => import('./pages/disponibilidade/disponibilidade.module').then( m => m.DisponibilidadePageModule)
+  },
+  {
+    path: 'area',
+    loadChildren: () => import('./pages/area/area.module').then( m => m.AreaPageModule)
+  },
+ 
 ];
 
 @NgModule({

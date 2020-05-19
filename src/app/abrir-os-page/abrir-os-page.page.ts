@@ -68,8 +68,6 @@ export class AbrirOsPagePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     ) { 
 
-     
-
       this.falhasSubscription= this.falhaService.getFalhas().subscribe(data =>{
         this.falhas = data;
         // console.log("kfljdlkfjfd" + this.falhas);
@@ -179,7 +177,7 @@ this.ordem.cor="danger"
 
     await this.loading.dismiss();
 
-    this.navCtrl.navigateBack('/status-os-page');
+    // this.navCtrl.navigateBack('/status-os-page');
   } catch (error) {
     this.presentToast('Erro ao tentar salvar');
     this.loading.dismiss();

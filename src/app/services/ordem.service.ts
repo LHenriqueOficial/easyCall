@@ -23,6 +23,7 @@ private ordemCollection : AngularFirestoreCollection<Ordem>;
       })
     }))
   };
+  
   getOrdem(id: string) {
     return this.ordemCollection.doc<Ordem>(id).valueChanges();
   }

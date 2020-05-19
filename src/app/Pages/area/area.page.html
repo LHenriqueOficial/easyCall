@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-back-button slot="start"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Cadastro de Area</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item>
+        <ion-item>
+            <ion-label>Nome da Area:</ion-label>
+            <ion-input type="text" [(ngModel)]="area.descricao"></ion-input>
+        </ion-item>
+    </ion-item>
+
+    <ion-button (click)="saveArea()" color="dark" expand="block" fill="outline">Cadastrar</ion-button>
+
+
+</ion-content>

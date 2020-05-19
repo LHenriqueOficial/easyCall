@@ -1,14 +1,14 @@
 <ion-header>
-    <ion-toolbar color="dark">
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+    <ion-toolbar color="success">
+        <ion-buttons>
+            <ion-back-button slot="start" color="dark"></ion-back-button>
         </ion-buttons>
 
         <ion-title>Relatório Ordens</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content color="dark">
+<ion-content color="success">
 
     <ion-card color="danger">
         <ion-card-header>
@@ -30,7 +30,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label><b>Tempo Total Serviços:</b><br>{{valorTempoServico}}/ minutos</ion-label>
+                <ion-label><b>Tempo Total Serviços:</b><br>{{tempoTotaldeServico}}/ minutos</ion-label>
             </ion-item>
             <ion-item>
                 <ion-label><b>Média Tempo de Serviço:</b><br>{{mediaServ}}/ minutos</ion-label>

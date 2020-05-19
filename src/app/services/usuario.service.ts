@@ -32,10 +32,13 @@ export class UsuarioService {
       })
     )
   }
+
   
   getUser(id: string) {
     return this.usuarioCollection.doc<Usuarios>(id).valueChanges();
   }
-
+addUsuario(usuario: Usuarios) {
+    return this.usuarioCollection.add(usuario);
+  }
 
 }

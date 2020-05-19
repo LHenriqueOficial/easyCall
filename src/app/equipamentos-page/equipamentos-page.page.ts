@@ -6,7 +6,10 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { SetorService } from './../services/setor.service';
-import { Setor } from '../model/setor';
+import { Setor } from '../model/areadeTrabalho';
+import { AreaService } from '../services/area.service';
+import { Area } from '../model/area';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-equipamentos-page',
@@ -16,12 +19,16 @@ import { Setor } from '../model/setor';
 export class EquipamentosPagePage implements OnInit {
   public equipamentos = new Array<Equipamentos>(); 
   public setores = new Array<Setor>();
+  public areas = new Array<Area>(); 
   public equip: Equipamentos = {};
   public setor: Setor ={};
   private equipamentoId: string = null;
   private loading: any;
   private equipamentoSubscription: Subscription;
   private setorSubscription: Subscription;
+  private areaSubscription: Subscription;
+  ordemList: any;
+
  
   // variavel para mostar a lista de equipamentos 
   
@@ -33,16 +40,21 @@ export class EquipamentosPagePage implements OnInit {
     private loadingCtrl: LoadingController,
     private setorservice: SetorService,
     private authService: AuthService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private areaservice:AreaService,
+    private db: AngularFirestore,
   ) {
     
-    this.equipamentoSubscription= this.equiService.getEquipamentos().subscribe(data =>{
-      this.equipamentos = data;
-      this.setorSubscription = this.setorservice.getSetores().subscribe(data =>{
-        this.setores = data;
-      })
+    // this.equipamentoSubscription= this.equiService.getEquipamentos().subscribe(data =>{
+    //   this.equipamentos = data;
       
-    });
+    // });
+    this.setorSubscription = this.setorservice.getSetores().subscribe(data =>{
+      this.setores = data;
+    })
+    this.areaSubscription = this.areaservice.getAreas().subscribe(data =>{
+      this.areas = data;
+    })
     // this. equipamentoId = this.activatedRoute.snapshot.params['id'];
     // if (this. equipamentoId) this.loadEquipamento();
 
@@ -53,7 +65,7 @@ export class EquipamentosPagePage implements OnInit {
 
   ngOnDestroy() {
     if (this.equipamentoSubscription) this.equipamentoSubscription.unsubscribe();
-    if (this.setorSubscription) this.setorSubscription.unsubscribe();
+    if (this.areaSubscription) this.setorSubscription.unsubscribe();
 
   }
   loadEquipamento() {
@@ -86,6 +98,7 @@ export class EquipamentosPagePage implements OnInit {
         this.equip.qtdParada =0;
         this.equip.tempo=0;
         this.equip.accResposta=0;
+        this.equip.disponibilidade =0;
         await this.equiService.addequipamento(this.equip);
         this.equip.descricao ="";
         this.setor.descricao="";
@@ -98,6 +111,11 @@ export class EquipamentosPagePage implements OnInit {
       }
     }
   }
+
+  async listarEquipamento() {
+  this.equipamentoSubscription= this.equiService.getEquipamentos().subscribe(data =>{
+      this.equipamentos = data;})
+    }
 
 
   async presentLoading() {

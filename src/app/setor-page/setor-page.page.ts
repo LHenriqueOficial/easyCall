@@ -5,7 +5,7 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
 import { SetorService } from '../services/setor.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
-import { Setor } from '../model/setor';
+import { Setor } from '../model/areadeTrabalho';
 
 @Component({
   selector: 'app-setor-page',

@@ -4,6 +4,11 @@ import { NavController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { async } from '@angular/core/testing';
+import { Subscription } from 'rxjs';
+import { Setor } from '../model/areadeTrabalho';
+import { SetorService } from './../services/setor.service';
+import { Funcao } from './../model/funcao';
+import { FuncaoService } from './../services/funcao.service';
 
 @Component({
   selector: 'app-cadastro-page',
@@ -11,13 +16,43 @@ import { async } from '@angular/core/testing';
   styleUrls: ['./cadastro-page.page.scss'],
 })
 export class CadastroPagePage implements OnInit {
-  usuario:Usuarios
-  constructor(public fbauth: AngularFireAuth ,public fbstore:AngularFirestore, 
-    public AlertCtrl :AlertController, public navCtrl : NavController) { 
+  
+  setorSubscription: Subscription;
+  public setores = new Array<Setor>();
+  funcaoSubscription: Subscription;
+  public funcoes = new Array<Funcao>();
+  public funcao: Funcao={};
+  public setor: Setor= {};
+  public usuario: Usuarios= {};
+  
+
+
+  constructor(
+    public fbauth: AngularFireAuth ,
+    public fbstore:AngularFirestore, 
+    public AlertCtrl :AlertController, 
+    public navCtrl : NavController,
+    public setorService: SetorService,
+    public funcaoService: FuncaoService,)
+     { 
     this.usuario=new Usuarios()
+    this.setorSubscription = this.setorService.getSetores().subscribe( data =>{
+    this.setores =data;
+
+      console.log("teste setor"+ this.setores)
+    })
+
+    this.funcaoSubscription = this.funcaoService.getFuncoes().subscribe(data =>{
+      this.funcoes = data;
+    })
+  
   }
 
   ngOnInit() {
+  }
+  ngOnDestroy() {
+    this.funcaoSubscription.unsubscribe();
+    this.setorSubscription.unsubscribe();
   }
 showScreen(nomeDaPagina: string){
   this.navCtrl.navigateForward(nomeDaPagina)

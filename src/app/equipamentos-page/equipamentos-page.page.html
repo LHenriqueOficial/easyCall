@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="success">
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+        <ion-buttons>
+            <ion-back-button slot="start" color="dark"></ion-back-button>
         </ion-buttons>
         <ion-title>Cadastro Equipamentos</ion-title>
     </ion-toolbar>
@@ -14,21 +14,31 @@
     </ion-item>
     <ion-item color="success">
         <ion-label style=" color: black;">
-            <ion-icon slot="end" name="location"></ion-icon>Setor</ion-label>
+            <ion-icon slot="end" name="location"></ion-icon>Area</ion-label>
         <ion-select style=" color: black;" okText="Ok" cancelText="Sair" [(ngModel)]="equip.setor">
-            <ion-select-option *ngFor="let setor of setores" [value]="setor.descricao">{{ setor.descricao }}</ion-select-option>
-        </ion-select>
-    </ion-item>
-
-    <ion-item color="success">
-        <ion-label style=" color: black;">
-            <ion-icon slot="end" name="subway"></ion-icon>Equipamento</ion-label>
-        <ion-select style=" color: black;" okText="Ok" cancelText="Sair" [(ngModel)]="equip.descricao">
-            <ion-select-option *ngFor="let equipamento of equipamentos" [value]="equipamento.descricao">{{ equipamento.descricao }}</ion-select-option>
+            <ion-select-option *ngFor="let area of areas" [value]="area.descricao">{{ area.descricao }}</ion-select-option>
         </ion-select>
     </ion-item>
 
 
+    <ion-button (click)="listarEquipamento() " expand="block " color="dark ">
+        Listar Equipamento
+    </ion-button>
+
+    <ion-card *ngFor="let equipamento of equipamentos">
+        <ion-card-header>
+
+            <ion-card-title><b>Descricao:</b> {{equipamento.descricao}}</ion-card-title>
+            <ion-label><b>Setor:</b> {{equipamento.setor}}</ion-label>
+            <br>
+            <ion-label><b>Quantidade de Paradas: </b>{{equipamento.qtdParada}}</ion-label>
+            <br>
+            <ion-label><b>Tempo de Resposta:</b>{{equipamento.accResposta}}</ion-label>
+            <br>
+            <ion-label><b>Disponibilidade:</b>{{equipamento.disponibilidade}}</ion-label>
+
+        </ion-card-header>
+    </ion-card>
 </ion-content>
 
 <ion-footer>

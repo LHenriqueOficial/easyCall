@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar color="success">
+        <ion-buttons>
+            <ion-back-button slot="start"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Disponibilidade</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card color="tertiary">
+        <ion-card-header>
+            <ion-card-title>Silos</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="horasTrabalhadas"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="diasTrabalhados"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="qtdEquip"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-label>{{ disponibilidade}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-label>{{ tempoPorEquip}}</ion-label>
+        </ion-item>
+        <ion-button (click)="calcDistponibilidade()" expand="block" fill="clear" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+    <ion-card color="tertiary">
+        <ion-card-header>
+            <ion-card-title>Silos</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="horasTrabalhadas"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="diasTrabalhados"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="qtdEquip"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-label>{{ disponibilidade}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-label>{{ tempoPorEquip}}</ion-label>
+        </ion-item>
+        <ion-button (click)="calcDistponibilidade()" expand="block" fill="clear" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+
+
+</ion-content>

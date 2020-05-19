@@ -16,7 +16,7 @@ export class RelatorioEquipamentosPage implements OnInit {
  public equipamentos = new Array<Equipamentos>();
  listaequipamento:Observable<Equipamentos[]>
  ordemList: any = []
-  tempodeParada: any=[]
+tempodeParada: any=[]
 
 
 
