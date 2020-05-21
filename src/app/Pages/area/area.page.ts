@@ -56,7 +56,7 @@ export class AreaPage implements OnInit {
         
         this.area.diasTrabalhados =0 ;
         this.area.disponibilidade=0;
-        this.area.horastrabalhadas=0 ;
+        this.area.horasTrabalhadas=0 ;
         await this.areaservice.addArea(this.area);
         this.area.descricao="";
      

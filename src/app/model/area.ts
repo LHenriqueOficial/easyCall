@@ -1,15 +1,19 @@
 export class Area {
     descricao?:string;
     diasTrabalhados?:number;
-    horastrabalhadas?:number;
+    horasTrabalhadas?:number;
+    tempoPorEquip?: number;
     disponibilidade?:number;
+    qtdEquip?:number;
+ 
 
-    constructor(descricao:string="", diasTrabalhados: number=0,
-     horasTrabalhadas:number=0, disponibilidade: number=0){
+    constructor(){
 
-        this.descricao= descricao;
-        this.diasTrabalhados= diasTrabalhados;
-        this.horastrabalhadas= horasTrabalhadas;
-        this.disponibilidade= disponibilidade;
+        this.descricao="";
+        this.diasTrabalhados= 0;
+        this.horasTrabalhadas= 0;
+        this.disponibilidade= 0;
+        this.tempoPorEquip = 0;
+        this.qtdEquip= 0;
     }
 }

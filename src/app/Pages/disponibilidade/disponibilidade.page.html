@@ -7,69 +7,348 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-card color="tertiary">
+<ion-content color="success">
+
+    <ion-card color="dark" *ngFor=" let laser of laserList">
         <ion-card-header>
-            <ion-card-title>Silos</ion-card-title>
+            <ion-card-title>{{laser.descricao }} </ion-card-title>
         </ion-card-header>
         <ion-item>
             <ion-label>Horas Trabalhadas:</ion-label>
-            <ion-input type="number" [(ngModel)]="horasTrabalhadas"></ion-input>
+            <ion-input type="number" [(ngModel)]="lase.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{laser.horasTrabalhadas}}</ion-badge>
         </ion-item>
         <ion-item>
             <ion-label>Dias Trabalhados: </ion-label>
-            <ion-input type="number" [(ngModel)]="diasTrabalhados"></ion-input>
+            <ion-input type="number" [(ngModel)]="lase.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end"> {{laser.diasTrabalhados}}</ion-badge>
         </ion-item>
 
         <ion-item>
             <ion-label>Equipamentos: </ion-label>
-            <ion-input type="number" [(ngModel)]="qtdEquip"></ion-input>
+            <ion-input type="number" [(ngModel)]="lase.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end"> {{laser.qtdEquip}}</ion-badge>
         </ion-item>
 
         <ion-item>
-            <ion-label>Disponibilidade Total: </ion-label>
-            <ion-label>{{ disponibilidade}}</ion-label>
+            <ion-label>Disponibilidade:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end"> {{laser.disponibilidade | number:0}}</ion-badge>
         </ion-item>
 
         <ion-item>
             <ion-label>Tempo por Equipamento:</ion-label>
-            <ion-label>{{ tempoPorEquip}}</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end"> {{ laser.tempoPorEquip | number:0}}</ion-badge>
         </ion-item>
-        <ion-button (click)="calcDistponibilidade()" expand="block" fill="clear" shape="round">
+        <ion-button (click)="calcValor(laserId)" color="dark" expand="block" shape="round">
             Calcular
         </ion-button>
     </ion-card>
-    <ion-card color="tertiary">
+
+
+    <ion-card color="dark" *ngFor=" let pul5000 of list5000">
         <ion-card-header>
-            <ion-card-title>Silos</ion-card-title>
+            <ion-card-title>{{pul5000.descricao}}</ion-card-title>
         </ion-card-header>
         <ion-item>
             <ion-label>Horas Trabalhadas:</ion-label>
-            <ion-input type="number" [(ngModel)]="horasTrabalhadas"></ion-input>
+            <ion-input type="number" [(ngModel)]="pul5.horasTrabalhadas"></ion-input>
+
+            <ion-badge color="success" mode="ios" slot="end">{{pul5000.horasTrabalhadas}}</ion-badge>
         </ion-item>
         <ion-item>
             <ion-label>Dias Trabalhados: </ion-label>
-            <ion-input type="number" [(ngModel)]="diasTrabalhados"></ion-input>
+            <ion-input type="number" [(ngModel)]="pul5.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{pul5000.diasTrabalhados}}</ion-badge>
         </ion-item>
 
         <ion-item>
             <ion-label>Equipamentos: </ion-label>
-            <ion-input type="number" [(ngModel)]="qtdEquip"></ion-input>
+            <ion-input type="number" [(ngModel)]="pul5.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{pul5000.qtdEquip}}</ion-badge>
         </ion-item>
 
         <ion-item>
             <ion-label>Disponibilidade Total: </ion-label>
-            <ion-label>{{ disponibilidade}}</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{pul5000.disponibilidade | number:0}}</ion-badge>
         </ion-item>
 
         <ion-item>
             <ion-label>Tempo por Equipamento:</ion-label>
-            <ion-label>{{ tempoPorEquip}}</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{pul5000.tempoPorEquip | number:0}}</ion-badge>
         </ion-item>
-        <ion-button (click)="calcDistponibilidade()" expand="block" fill="clear" shape="round">
+        <ion-button (click)="calcValor(id5000)" color="dark" expand="block" shape="round">
             Calcular
         </ion-button>
     </ion-card>
+
+    <ion-card color="dark" *ngFor=" let pul1000 of list1000">
+        <ion-card-header>
+            <ion-card-title>{{pul1000.descricao}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="pul1.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{pul1000.horasTrabalhadas}}</ion-badge>
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="pul1.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{pul1000.diasTrabalhados}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="pul1.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pul1000.qtdEquip}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pul1000.disponibilidade|number:0}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pul1000.tempoPorEquip |number:0}}</ion-badge>
+        </ion-item>
+
+        <ion-button (click)="calcValor(id1000)" color="dark" expand="block" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+
+    <ion-card color="dark" *ngFor=" let pend of pendList">
+        <ion-card-header>
+            <ion-card-title>{{pend.descricao}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="pen.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pend.horasTrabalhadas}}</ion-badge>
+
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="pen.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pend.diasTrabalhados}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="pen.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pend.qtdEquip}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pend.disponibilidade |number:0}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pend.tempoPorEquip |number:0}}</ion-badge>
+        </ion-item>
+        <ion-button (click)="calcValor(pendId)" color="dark" expand="block" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+
+
+    <ion-card color="dark" *ngFor=" let silos of silosList">
+        <ion-card-header>
+            <ion-card-title>{{silos.descricao}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="silo.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ silos.horasTrabalhadas}}</ion-badge>
+
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="silo.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ silos.diasTrabalhados}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="silo.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{silos.qtdEquip}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ silos.disponibilidade |number:0}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ silos.tempoPorEquip |number:0}}</ion-badge>
+        </ion-item>
+        <ion-button (click)="calcValor(silosId)" color="dark" expand="block" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+
+    <ion-card color="dark" *ngFor=" let pintura of pinturaList">
+        <ion-card-header>
+            <ion-card-title>{{pintura.descricao}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="pintA.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pintura.horasTrabalhadas}}</ion-badge>
+
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="pintA.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pintura.diasTrabalhados}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="pintA.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pintura.qtdEquip}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pintura.disponibilidade | number:0}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pintura.tempoPorEquip | number:0}}</ion-badge>
+        </ion-item>
+        <ion-button (click)="calcValor(pinturaId)" color="dark" expand="block" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+
+    <ion-card color="dark" *ngFor=" let pinturaM of pmanualList">
+        <ion-card-header>
+            <ion-card-title>{{pinturaM.descricao}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="pintM.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pinturaM.horasTrabalhadas}}</ion-badge>
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="pintM.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pinturaM.diasTrabalhados}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="pintM.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ pinturaM.qtdEquip}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pinturaM.disponibilidade| number:0}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ pinturaM.tempoPorEquip | number:0}}</ion-badge>
+        </ion-item>
+        <ion-button (click)="calcValor(pmanualId)" color="dark" expand="block" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+
+    <ion-card color="dark" *ngFor=" let corteD of corteList">
+        <ion-card-header>
+            <ion-card-title>{{corteD.descricao}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="corted.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ corteD.horasTrabalhadas}}</ion-badge>
+
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="corted.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ corteD.diasTrabalhados}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="corted.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ corteD.qtdEquip}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ corteD.disponibilidade | number:0}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ corteD.tempoPorEquip | number:0}}</ion-badge>
+
+        </ion-item>
+        <ion-button (click)="calcValor(corteId)" color="dark" expand="block" shape="round">
+            Calcular
+        </ion-button>
+
+    </ion-card>
+
+    <ion-card color="dark" *ngFor=" let perfil of perfilList">
+        <ion-card-header>
+            <ion-card-title>{{perfil.descricao}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+            <ion-label>Horas Trabalhadas:</ion-label>
+            <ion-input type="number" [(ngModel)]="cortef.horasTrabalhadas"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ perfil.horastrabalhadas}}</ion-badge>
+
+        </ion-item>
+        <ion-item>
+            <ion-label>Dias Trabalhados: </ion-label>
+            <ion-input type="number" [(ngModel)]="cortef.diasTrabalhados"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ perfil.diasTrabalhados}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Equipamentos: </ion-label>
+            <ion-input type="number" [(ngModel)]="cortef.qtdEquip"></ion-input>
+            <ion-badge color="success" mode="ios" slot="end">{{ perfil.qtdEquip}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidade Total: </ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ perfil.disponibilidade | number:0}}</ion-badge>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Tempo por Equipamento:</ion-label>
+            <ion-badge color="warning" mode="ios" slot="end">{{ perfil.tempoPorEquip | number:0}}</ion-badge>
+
+        </ion-item>
+        <ion-button (click)="calcValor(perfilId)" color="dark" expand="block" shape="round">
+            Calcular
+        </ion-button>
+    </ion-card>
+
+
+
+
+
 
 
 </ion-content>

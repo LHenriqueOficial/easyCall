@@ -159,6 +159,7 @@ carregaDados() {
   })
 }
 
+// pega valores inidividuais da coleção
 carregaTime(){
   let equip=this.db.collection("Equipamentos")
    equip.ref.where("descricao", "==", this.nomeEquip).get().then(result=>{
