@@ -11,21 +11,58 @@
 
     <ion-card color="danger" *ngFor=" let equipamento of ordemList">
         <ion-card-header>
-            <ion-card-title>{{equipamento.descricao}}</ion-card-title>
+            <ion-card-title><b>Equipamento: </b>{{equipamento.descricao }}</ion-card-title>
+            <ion-card-title><b>Setor: </b>{{ equipamento.setor}}</ion-card-title>
+
             <ion-item>
-                <ion-label><b>Tempo de parada:</b> {{tempodeParada}} minutos</ion-label>
+                <ion-label><b>Tempo de parada:</b> {{equipamento.tempo}} minutos</ion-label>
             </ion-item>
             <ion-item>
                 <ion-label><b>Quantidade de parada:</b> {{equipamento.qtdParada}} </ion-label>
             </ion-item>
-            <ion-item>
-                <ion-label><b>Disponibilidade:{{ ((800 - equipamento.tempo)/ equipamento.tempo * ( (equipamento.tempo/800) * 100 )) | number}}%</b> </ion-label>
+            <ion-item *ngIf="equipamento.setor === 'Silos'">
+                <ion-label><b>Disponibilidade:{{ ((dispSilos - equipamento.tempo)/ equipamento.tempo * ( (equipamento.tempo/dispSilos ) * 100 )) | number}}%</b> </ion-label>
             </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Puncionadeira5000'">
+                <ion-label><b>Disponibilidade: {{dispPul5}}</b> </ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Puncionadeira1000'">
+                <ion-label><b>Disponibilidade: {{dispPul1}}</b> </ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Corte e Dobra'">
+                <ion-label><b>Disponibilidade:{{ ((dispCorteDobra - equipamento.tempo)/ equipamento.tempo * ( (equipamento.tempo/dispCorteDobra ) * 100 )) | number}}%</b> </ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Corte Perfil'">
+                <ion-label><b>Disponibilidade: {{dispPerfil}}</b> </ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Pintura Automática'">
+                <ion-label><b>Disponibilidade: {{dispPintA}}</b> </ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Pintura Manual'">
+                <ion-label><b>Disponibilidade: {{dispPintM}}</b> </ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Laser'">
+                <ion-label><b>Disponibilidade:{{ ((dispLaser - equipamento.tempo)/ equipamento.tempo * ( (equipamento.tempo/dispLaser ) * 100 )) | number}}%</b> </ion-label>
+
+            </ion-item>
+
+            <ion-item *ngIf="equipamento.setor === 'Penddinghaus'">
+                <ion-label><b>Disponibilidade: {{dispPend}}</b> </ion-label>
+            </ion-item>
+
+
             <ion-item>
                 <ion-label><b>Tempo total de resposta:</b>{{equipamento.accResposta}}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label><b>Média tempo de resposta:</b>{{equipamento.accResposta}}</ion-label>
+                <ion-label><b>Média tempo de resposta:</b>{{equipamento.accResposta / equipamento.qtdParada}}</ion-label>
             </ion-item>
         </ion-card-header>
         <label>minimo:0</label>

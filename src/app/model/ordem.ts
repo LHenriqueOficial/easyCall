@@ -15,6 +15,8 @@ export class Ordem {
     tempoServico?: number;
     cor?: string;
     tempoResposta?: number;
+    descAtividade?:string;
+    tempoAnterior?:number;
 
 
 

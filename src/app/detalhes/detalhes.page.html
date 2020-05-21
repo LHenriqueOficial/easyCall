@@ -12,15 +12,15 @@
 
     <ion-item color="success">
         <ion-label><b>Nome Solicitane:</b> </ion-label>
-        <ion-input required type="text" [(ngModel)]="ordem.nome" [value]="ordem.nome"></ion-input>
+        <ion-input [disabled]="true" [(ngModel)]="ordem.nome" [value]="ordem.nome"></ion-input>
     </ion-item>
     <ion-item color="success">
         <ion-label><b>Setor:</b></ion-label>
-        <ion-input type="text" [(ngModel)]="ordem.setor" [value]="ordem.setor"></ion-input>
+        <ion-input [disabled]="true" [(ngModel)]="ordem.setor" [value]="ordem.setor"></ion-input>
     </ion-item>
     <ion-item color="success">
         <ion-label><b>Equipamento:</b> </ion-label>
-        <ion-input type="text" [(ngModel)]="ordem.equipamento" [value]="ordem.equipamento"></ion-input>
+        <ion-input [disabled]="true" [(ngModel)]="ordem.equipamento" [value]="ordem.equipamento"></ion-input>
     </ion-item>
     <ion-item color="success">
         <ion-label><b>Falha:</b> </ion-label>
@@ -29,22 +29,26 @@
     <ion-item color="success">
         <ion-icon name="calendar" color="dark"> </ion-icon>
         <ion-label><b>Hora de Abertura: </b> </ion-label>
-        <ion-input type="text"> {{ ordem.horaInicio | date:'dd-MM-yyyy HH:mm'}}</ion-input>
+        <ion-label style="color: black;">{{ordem.horaInicio | date:'dd-MM-yyyy HH:mm'}}</ion-label>
     </ion-item>
+
     <ion-item color="success">
         <ion-icon name="timer" color="dark"></ion-icon>
-        <ion-label><b>Tempo de Resposta:</b></ion-label>
-        <ion-input lines="none" type="text"> {{ordem.tempoResposta}}/ minutos</ion-input>
+        <ion-label><b>Resposta:</b></ion-label>
+        <ion-label style="color: black;">{{ordem.tempoResposta}}/ minutos</ion-label>
     </ion-item>
+
     <ion-item color="success">
         <ion-icon name="calendar" color="dark"></ion-icon>
         <ion-label><b>Hora de Início:</b> </ion-label>
-        <ion-input lines="none" type="text"> {{ ordem.horaInicioExecucao | date:'dd-MM-yyyy HH:mm'}}</ion-input>
+        <ion-label style="color: black;">{{ordem.horaInicioExecucao | date:'dd-MM-yyyy HH:mm'}}</ion-label>
+        <!-- <ion-input lines="none" type="text" [disabled]="true"> </ion-input> -->
     </ion-item>
     <ion-item color="success">
         <ion-icon name="calendar" color="dark"></ion-icon>
         <ion-label><b>Termino:</b> </ion-label>
-        <ion-input lines="none" type="text">{{ordem.horaFinalizacao | date:'dd-MM-yyyy HH:mm'}}</ion-input>
+        <ion-label style="color: black;">{{ordem.horaFinalizacao | date:'dd-MM-yyyy HH:mm'}}</ion-label>
+        <!-- <ion-input lines="none" [disabled]="true" type="text"></ion-input> -->
     </ion-item>
     <ion-item color="success">
         <ion-label><b>Executor:</b> </ion-label>
@@ -53,15 +57,18 @@
     <ion-item color="success">
         <ion-icon name="timer" color="dark"></ion-icon>
         <ion-label><b>Tempo de Execução:</b></ion-label>
-        <ion-input lines="none" type="text"> {{result}}/ minutos</ion-input>
+        <ion-label style="color: black;">{{result}}/ minutos</ion-label>
+
     </ion-item>
     <ion-item color="success">
         <ion-label><b>Status:</b> </ion-label>
-        <ion-input id="input" lines="none" required type="text" [(ngModel)]="ordem.status" [value]="ordem.status"></ion-input>
+        <ion-input lines="none" [disabled]="true" required type="text" [(ngModel)]="ordem.status" [value]="ordem.status"></ion-input>
         <ion-button (click)="finalizaOrdem()" expand="block " color="danger " [disabled]="valorBotao">
             Finalizar O.S
         </ion-button>
     </ion-item>
+    <ion-textarea [(ngModel)]="ordem.descAtividade" style="text-align: center; color: black;" [value]="ordem.descAtividade"><b>Descrição do Trabalho:</b>
+    </ion-textarea>
 
 
 </ion-content>

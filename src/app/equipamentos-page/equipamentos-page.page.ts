@@ -102,14 +102,15 @@ export class EquipamentosPagePage implements OnInit {
         await this.equiService.addequipamento(this.equip);
         this.equip.descricao ="";
         this.setor.descricao="";
+        this.equip.setor="";
         await this.loading.dismiss();
-
-        this.navCtrl.navigateBack('/equipamentos-page');
-      } catch (error) {
+      this.ngOnInit()   
+        } catch (error) {
         this.presentToast('Erro ao tentar salvar');
         this.loading.dismiss();
       }
     }
+    this.ngOnInit();
   }
 
   async listarEquipamento() {

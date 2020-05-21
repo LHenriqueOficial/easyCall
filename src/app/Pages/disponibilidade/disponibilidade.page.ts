@@ -199,7 +199,7 @@ tempoPorEquip:number;
 
 
 carregaAreas(){
-this.limpaListas();
+this.limpaListas()
   let lista=this.db.collection<Area>("Area")
   lista.ref.where("descricao", "==", "Corte e Dobra").get().then(res =>{
    res.forEach(doc => {
@@ -210,10 +210,13 @@ this.limpaListas();
      
    });
  })
+
+
  lista.ref.where("descricao", "==", "Laser").get().then(res =>{
    res.forEach(doc =>{
+     this.laserList.map(doc => doc.disponibilidade+ 788)
      this.laserList.push(doc.data())
-     console.log(doc.id, ' => ', doc.data())
+     console.log(doc.id, ' => ', this.laserList)
      this.laserId = doc.id;
      console.log( this.laserId)  
      

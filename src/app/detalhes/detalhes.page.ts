@@ -210,6 +210,7 @@ carregaTime(){
         this.ordem.status ='Finalizada'
         this.ordem.cor ='success'
         this.ordem.tempoServico = this.result
+        this.ordem.descAtividade
         await this.ordemService.updateOrdem(this.ordemId, this.ordem);
         this.equipamento.tempo = this.tempoAcc + Number(this.result);
         this.contagem.contaOsExecucao = Number(this.contaexecucao - this.subtraiOs)

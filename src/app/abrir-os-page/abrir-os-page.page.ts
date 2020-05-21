@@ -51,6 +51,8 @@ export class AbrirOsPagePage implements OnInit {
   idconta: string;
   public valorConta:number;
   public contaespera: number;
+  tempAntigo: number;
+  tempnovo: number;
 
 
 
@@ -155,15 +157,20 @@ this.ordem.cor="danger"
   let equip=this.db.collection("Equipamentos")
    equip.ref.where("descricao", "==", this.ordem.equipamento).get().then(result=>{
     result.forEach(element =>{
-      this.tempoAcc=element.data().tempo
-      this.qtdParada= element.data().qtdParada
+      this.tempoAcc=element.data().tempo;
+      this.qtdParada= element.data().qtdParada;
+      this.tempAntigo= element.data().tempoAnterior;
+      this.tempnovo= element.data().tempoAtual;
+      
       // console.log("tempo de parada   " + this.tempoAcc)
       // console.log("quantidade de parada  base de dados print 2  " + this.qtdParada)
       // console.log("somando mais 1 para variavel  print 3 " + (this.qtdParada + this.somaQtdPara) ) 
 
       this.equipamento.qtdParada = Number(this.qtdParada + this.somaQtdPara)
       // soma numero de Ordem de serviço
-
+      this.equipamento.tempoAnterior = this.tempnovo;
+      this.equipamento.tempoAtual = this.ordem.horaInicio;
+      Number( this.equipamento.tempoEntreFalha = this.ordem.horaInicio - this.equipamento.tempoAnterior)
       this.equipService.updateEquipamento(this.equipId, this.equipamento)
     })
  })
@@ -171,10 +178,8 @@ this.ordem.cor="danger"
   try {
     await this.ordemService.addOrdem(this.ordem);
     this.carregaContagem();
-    console.log("valor conta 2222  " + this.contagem.contaOs)
+    // console.log("valor conta 2222  " + this.contagem.contaOs)
     console.log("valor salvo com sucesso   ")
-
-
     await this.loading.dismiss();
 
     // this.navCtrl.navigateBack('/status-os-page');
