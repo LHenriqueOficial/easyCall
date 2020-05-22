@@ -57,13 +57,29 @@
                 <ion-label><b>Disponibilidade: {{dispPend}}</b> </ion-label>
             </ion-item>
 
-
             <ion-item>
                 <ion-label><b>Tempo total de resposta:</b>{{equipamento.accResposta}}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label><b>Média tempo de resposta:</b>{{equipamento.accResposta / equipamento.qtdParada}}</ion-label>
+                <ion-label><b>Média tempo de resposta:</b>{{equipamento.accResposta / equipamento.qtdParada | number:0}}</ion-label>
             </ion-item>
+
+            <ion-item>
+                <ion-label><b>data falha anterior:</b>{{equipamento.tempoAnterior | date:'dd-MM-yyyy HH:mm'}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label><b>data ultima falha:</b>{{equipamento.tempoAtual | date:'dd-MM-yyyy HH:mm'}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label><b>tempo entre falha</b>{{(equipamento.tempoEntreFalha / 1000) / 60 | number:0}}</ion-label>
+                <!-- this.result = ((this.teste - this.ordem.horaInicio)/ 1000 / 60).toFixed(2) -->
+
+            </ion-item>
+
+
+
         </ion-card-header>
         <label>minimo:0</label>
         <ion-range min="0" max="800" color="warning" pin="true" step="1" diseble="true" snaps="true" ticks="true" [value]="equipamento.tempo">{{equipamento.tempo}}
