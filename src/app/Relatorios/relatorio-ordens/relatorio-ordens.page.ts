@@ -6,6 +6,7 @@ import { analytics } from 'firebase';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Contagem } from 'src/app/model/contagem';
 import { element } from 'protractor';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-relatorio-ordens',
@@ -35,7 +36,8 @@ export class RelatorioOrdensPage implements OnInit {
 
   constructor(
     private ordemService: OrdemService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private roter: Router,
   ) 
   {
     this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
@@ -55,6 +57,7 @@ export class RelatorioOrdensPage implements OnInit {
 
   ngOnDestroy() {
     if (this.ordemSubscription) this.ordemSubscription.unsubscribe();
+
   }
 
 contaOrdem(){
@@ -70,19 +73,26 @@ contaOrdem(){
   })
   
 }
-carregaOrdem(valor: string) {
-this.modelo = valor;
-  let lista=this.db.collection<Ordem>("Ordem")
- 
-   lista.ref.where("status", "==", valor).get().then(res =>{
-    
-    res.forEach(doc => {
-      this.ordemList.push(doc.data())
-      console.log(doc.id, ' => ' , doc.data())
-    
-    });
-  })
+
+
+rota(valor: string){
+  this.roter.navigate(['/status-os-page', valor])
+
 }
+
+// carregaOrdem(valor: string) {
+// this.modelo = valor;
+//   let lista=this.db.collection<Ordem>("Ordem")
+ 
+//    lista.ref.where("status", "==", valor).get().then(res =>{
+    
+//     res.forEach(doc => {
+//       this.ordemList.push(doc.data())
+//       console.log(doc.id, ' => ' , doc.data())
+    
+//     });
+//   })
+// }
 
 calcTempoResposta(){
   let lista=this.db.collection<Ordem>("Ordem")

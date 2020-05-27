@@ -20,22 +20,22 @@ export class AppComponent implements OnInit {
       url: '/home-page',
       icon: 'home',
     },
-    {
-      title: 'Abrir Ordem de Serviço',
-      url: '/abrir-os-page',
-      icon: 'newspaper'
-    },
-    {
-      title: 'Mensagens Usuários',
-      url: '/menssagem-page',
-      icon: 'send',
+    // {
+    //   title: 'Abrir Ordem de Serviço',
+    //   url: '/abrir-os-page',
+    //   icon: 'newspaper'
+    // },
+    // {
+    //   title: 'Mensagens Usuários',
+    //   url: '/menssagem-page',
+    //   icon: 'send',
       
-    },
-    {
-      title: 'Status Ordem de Serviço',
-      url: '/status-os-page',
-      icon: 'git-compare'
-    },
+    // },
+    // {
+    //   title: 'Status Ordem de Serviço',
+    //   url: '/status-os-page',
+    //   icon: 'git-compare'
+    // },
     // {
     //   title: 'Trash',
     //   url: '/folder/Trash',

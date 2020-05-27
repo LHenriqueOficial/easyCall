@@ -37,17 +37,17 @@
             </ion-item>
         </ion-card-header>
         <ion-item color="danger">
-            <ion-button (click)="carregaOrdem('Finalizada')" expand="block" shape="round" color="success">
+            <ion-button (click)="rota('Finalizada')" expand="block" shape="round" color="success">
                 Os Realizadas / {{valorConta}}
             </ion-button>
         </ion-item>
         <ion-item color="danger">
-            <ion-button (click)="carregaOrdem('Em execução')" expand="block" shape="round" size="small" color="warning">
+            <ion-button (click)="rota('Em Execução')" expand="block" shape="round" size="small" color="warning">
                 Os Em Execução / {{contaExecucao}}
             </ion-button>
         </ion-item>
         <ion-item color="danger">
-            <ion-button (click)="carregaOrdem('Aguardando')" expand="block" shape="round" color="danger">
+            <ion-button (click)="rota('Aguardando...')" expand="block" shape="round" color="danger">
                 Os Em Espera / {{contaAguarde}}
             </ion-button>
         </ion-item>
@@ -63,9 +63,6 @@
             <ion-label>Data de Abertura </ion-label>{{ordem.horaInicio | date:'dd-MM-yyyy HH:mm' }}
         </ion-card-content>
     </ion-card>
-
-
-
 
 
 

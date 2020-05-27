@@ -19,26 +19,57 @@
     </div>
     <br>
 
-    <ion-button color="dark" expand="block" fill="outline " (click)="showScreen('abrir-os-page')">Abrir O.S</ion-button>
+    <ion-button color="dark" expand="block" (click)="showScreen('abrir-os-page')">Abrir O.S</ion-button>
     <br>
     <!-- <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('menssagem-page')">Enviar Menssagem</ion-button> -->
 
-    <ion-button color="dark" expand="block" fill="outline " (click)="showScreen('usuarios-page')">Usuários/Mensagens</ion-button>
-    <br>
-    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('status-os-page')">Status O.S</ion-button>
-    <br>
-    <ion-button color="dark" expand="block" fill="outline" (click)="blockPage('manutencao')">Area de Manutenção</ion-button>
-    <br>
-    <ion-button color="dark" expand="block" (click)="blockPage('manutencao')">Area de Supervição e Liderança</ion-button>
-    <br>
+    <ion-button color="dark" expand="block" (click)="showScreen('usuarios-page')">Usuários Cadastrados</ion-button>
 
+    <br>
+    <ion-button color="dark" expand="block" (click)="showScreen('status-os-page')">Status O.S</ion-button>
+    <br>
+    <ion-button color="dark" expand="block" (click)="blockPage('manutencao')">Area de Manutenção</ion-button>
+    <br>
+    <ion-button [disabled]="true" color="dark" expand="block" (click)="blockPage('manutencao')">Area de Supervição e Liderança</ion-button>
+    <br>
+    <ion-badge color="warning" mode="ios" slot="end">5566</ion-badge>
 
 </ion-content>
 
+<ion-item color="dark">
+    <ion-tabs color="dark">
+        <ion-tab-bar slot="bottom" color="dark">
+            <ion-tab-button (click)="rota('Aguardando...')">
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Espera</ion-label>
+                <ion-badge color="danger">{{contaAguarde}}</ion-badge>
+            </ion-tab-button>
+
+            <ion-tab-button (click)="logOut()">
+                <ion-icon name="backspace-sharp" color="success"></ion-icon>Sair
+
+            </ion-tab-button>
+
+            <ion-tab-button (click)="rota('Em Execução')">
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Execução </ion-label>
+                <ion-badge color="warning">{{contaExecucao}}</ion-badge>
+            </ion-tab-button>
+
+
+
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-item>
+
+
 <ion-footer color="success">
-    <ion-toolbar color="success">
-        <ion-button expand="block" color="dark" (click)="logOut()">
-            <ion-icon name="backspace-sharp"></ion-icon>Sair
-        </ion-button>
-    </ion-toolbar>
+
+
+
+    <!-- <ion-toolbar color="success">
+            <ion-button expand="block" color="dark" (click)="logOut()">
+                <ion-icon name="backspace-sharp"></ion-icon>Sair
+            </ion-button>
+        </ion-toolbar> -->
 </ion-footer>

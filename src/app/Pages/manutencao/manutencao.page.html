@@ -1,21 +1,22 @@
 <ion-header>
     <ion-toolbar color="success">
         <ion-buttons slot="start">
-            <ion-back-button color="dark"></ion-back-button>
+            <ion-menu-button color="dark"></ion-menu-button>
         </ion-buttons>
-        <ion-title color="success">Manutencão</ion-title>
+        <ion-title style="text-align: center;" color="success">Manutencão</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content color="success">
+    <br><br>
 
-    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('relatorio-page')">Relatórios</ion-button>
+    <ion-button color="dark" expand="block" (click)="showScreen('relatorio-page')">Relatórios</ion-button>
     <br>
-    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('os-manutencaopage')">Os de Manutenção</ion-button>
+    <ion-button color="dark" expand="block" (click)="showScreen('os-manutencaopage')">Os de Manutenção</ion-button>
     <br>
-    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('equipamentos-page')">Cadastro Equipamentos</ion-button>
+    <ion-button color="dark" expand="block" (click)="showScreen('equipamentos-page')">Cadastro Equipamentos</ion-button>
     <br>
-    <ion-button color="dark" expand="block" fill="outline" (click)="showScreen('setor-page')">Cadastro Setor</ion-button>
+    <ion-button color="dark" expand="block" (click)="showScreen('setor-page')">Cadastro Setor</ion-button>
     <br>
     <ion-button color="dark" expand="block" (click)="showScreen('area')">Casdastro de Area</ion-button>
     <br>
@@ -24,3 +25,29 @@
 
 
 </ion-content>
+
+<ion-item color="dark">
+    <ion-tabs color="dark">
+        <ion-tab-bar slot="bottom" color="dark">
+            <ion-tab-button (click)="showScreen('status-os-page')">
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Espera</ion-label>
+                <ion-badge color="danger">6</ion-badge>
+            </ion-tab-button>
+
+            <ion-tab-button (click)="showScreen('home-page')">
+                <ion-icon name="home" color="success"></ion-icon>Pagina Inicial
+
+            </ion-tab-button>
+
+            <ion-tab-button>
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Execução </ion-label>
+                <ion-badge color="warning">6</ion-badge>
+            </ion-tab-button>
+
+
+
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-item>

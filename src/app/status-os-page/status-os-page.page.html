@@ -1,9 +1,26 @@
 <ion-header>
     <ion-toolbar color="success">
-        <ion-buttons>
+
+        <ion-buttons *ngIf=" status === 'Finalizada'">
+            <ion-back-button slot="start" color="dark"></ion-back-button>
+        </ion-buttons>
+
+
+        <ion-buttons *ngIf=" status === 'Aguardando...'">
+            <ion-back-button slot="start" color="dark"></ion-back-button>
+        </ion-buttons>
+
+
+        <ion-buttons *ngIf=" status === 'Em Execução'">
+            <ion-back-button slot="start" color="dark"></ion-back-button>
+        </ion-buttons>
+
+
+        <ion-buttons *ngIf=" status === 'padrao'">
             <ion-back-button slot="start" color="dark" (click)="showScreen('home-page')"></ion-back-button>
         </ion-buttons>
-        <ion-title>Status O.S</ion-title>
+
+        <ion-title>Status O.S . {{status}}</ion-title>
     </ion-toolbar>
 </ion-header>
 

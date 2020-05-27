@@ -99,6 +99,9 @@ export class EquipamentosPagePage implements OnInit {
         this.equip.tempo=0;
         this.equip.accResposta=0;
         this.equip.disponibilidade =0;
+        this.equip.tempoAnterior=0;
+        this.equip.tempoAtual=0;
+        this.equip.tempoEntreFalha=0;
         await this.equiService.addequipamento(this.equip);
         this.equip.descricao ="";
         this.setor.descricao="";
@@ -114,8 +117,8 @@ export class EquipamentosPagePage implements OnInit {
   }
 
   async listarEquipamento() {
-  this.equipamentoSubscription= this.equiService.getEquipamentos().subscribe(data =>{
-      this.equipamentos = data;})
+   this.equipamentoSubscription= await this.equiService.getEquipamentos().subscribe(data =>{
+    this.equipamentos = data;})
     }
 
 

@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {path: 'inicial-page',loadChildren: () => import('./inicial-page/inicial-page.module').then( m => m.InicialPagePageModule)
   },
-  {path: 'cadastro-page',loadChildren: () => import('./cadastro-page/cadastro-page.module').then( m => m.CadastroPagePageModule)
+  {path: 'cadastro-page', loadChildren: () => import('./cadastro-page/cadastro-page.module').then( m => m.CadastroPagePageModule)
   },
   {path: 'login-page',canActivate: [LoggedGuard] , loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
   },
@@ -28,6 +28,10 @@ const routes: Routes = [
   {path: 'abrir-os-page',canActivate: [AuthGuard],loadChildren: () => import('./abrir-os-page/abrir-os-page.module').then( m => m.AbrirOsPagePageModule)
   },
   {path: 'menssagem-page/:id',loadChildren: () => import('./menssagem-page/menssagem-page.module').then( m => m.MenssagemPagePageModule)
+  },
+  // {path: 'status-os-page/:Aguardando',loadChildren: () => import('./status-os-page/status-os-page.module').then( m => m.StatusOsPagePageModule)
+  // },
+  {path: 'status-os-page/:valor',loadChildren: () => import('./status-os-page/status-os-page.module').then( m => m.StatusOsPagePageModule)
   },
   {path: 'status-os-page',loadChildren: () => import('./status-os-page/status-os-page.module').then( m => m.StatusOsPagePageModule)
   },

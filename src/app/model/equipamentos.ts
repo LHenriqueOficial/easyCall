@@ -19,7 +19,7 @@ export class Equipamentos {
         this.disponibilidade= 0;
         this.tempoAnterior=0;
         this.tempoAtual=0
-        this.tempoEntreFalha
+        this.tempoEntreFalha=0;
 
     }
 

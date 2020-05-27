@@ -37,11 +37,8 @@ export class ManutencaoPage implements OnInit {
                result.forEach(element =>{
                  this.funcao=element.data().funcao
                  
-
                })
             })
-
-
       }
       
       else{

@@ -20,8 +20,8 @@
     </ion-card>
     <br>
     <ion-card router-direction="back" color="danger">
-        <img src="./assets\icon\furadeira.png" />
-        <img src="./assets\icon\grafico.png" />
+        <img src="./assets\icon\system.png" />
+
         <ion-card-header>
             <ion-item color="danger">
                 <ion-button color="dark" expand="block" (click)="showScreen('relatorio-equipamentos')"> Equipamentos
@@ -51,3 +51,24 @@
     </ion-card>
 
 </ion-content>
+<ion-item color="dark">
+    <ion-tabs color="dark">
+        <ion-tab-bar slot="bottom" color="dark">
+            <ion-tab-button (click)="rota('Aguardando...')">
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Espera</ion-label>
+                <ion-badge color="danger">{{contaAguarde}}</ion-badge>
+            </ion-tab-button>
+
+            <ion-tab-button (click)="showScreen('home-page')">
+                <ion-icon name="home" color="success"></ion-icon>Pagina Inicial
+            </ion-tab-button>
+
+            <ion-tab-button (click)="rota('Em Execução')">
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Execução </ion-label>
+                <ion-badge color="warning">{{contaExecucao}}</ion-badge>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-item>

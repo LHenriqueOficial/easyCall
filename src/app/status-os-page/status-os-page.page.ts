@@ -35,6 +35,8 @@ export class StatusOsPagePage implements OnInit {
   equipId: string;
   equipList: any = []
   somaQtd: number =1;
+  status: string= null;
+ 
 
   constructor(
     private falhaService: FalhaService,
@@ -48,16 +50,36 @@ export class StatusOsPagePage implements OnInit {
     private navCtrl: NavController,
     private activatedRoute: ActivatedRoute,
   ) { 
-    this.statusOsSubscription = this.statusService.getStatus().subscribe(data =>{
-      this.statusOs =data; 
-    })
-    this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
-      this.ordem = data;
-    })
+    this.status = this.activatedRoute.snapshot.params['valor'];
+
+   
+if(this.status == 'Aguardando...'){
+
+this.carregaStatus(this.status)
+
+}else if(this.status == 'Em Execução'){
+  this.carregaStatus(this.status)
+
+}else if(this.status == 'Finalizada'){
+  this.carregaStatus(this.status)
+}
+else
+  this.status = "padrao"
+
+  this.carregaDados();
+
+  
+
+    // this.statusOsSubscription = this.statusService.getStatus().subscribe(data =>{
+    //   this.statusOs =data; 
+    // })
+    // this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
+    //   this.ordem = data;
+    // })
     
-    this.equipamentoSubscrible = this.equipServise.getEquipamentos().subscribe(data =>{
-      this.equipamentos = data;
-    })
+    // this.equipamentoSubscrible = this.equipServise.getEquipamentos().subscribe(data =>{
+    //   this.equipamentos = data;
+    // })
 
   }
 
@@ -70,12 +92,26 @@ export class StatusOsPagePage implements OnInit {
   }
 
   carregaDados() {
-    let lista=this.db.collection<Equipamentos>("Equipamentos")
+    let lista=this.db.collection<Ordem>("Ordem")
    
-     lista.ref.where("descricao", "==", this.nomeEquip).get().then(res =>{
+     lista.ref.orderBy("status", "asc" ).get().then(res =>{
       
       res.forEach(doc => {
-        this.equipList.push(doc.data())
+        this.ordem.push(doc.data())
+        console.log(doc.id, ' => ' , doc.data())
+        this.equipId = doc.id;
+        console.log("eeeeeeeeeeeee" + this.equipId+ " tempo ")  
+      });
+    })
+  }
+
+  carregaStatus(valor: string) {
+    let lista=this.db.collection<Ordem>("Ordem")
+   
+     lista.ref.where("status", "==", valor ).get().then(res =>{
+      
+      res.forEach(doc => {
+        this.ordem.push(doc.data())
         console.log(doc.id, ' => ' , doc.data())
         this.equipId = doc.id;
         console.log("eeeeeeeeeeeee" + this.equipId+ " tempo ")  
@@ -83,35 +119,36 @@ export class StatusOsPagePage implements OnInit {
     })
   }
   
-  carregaQtdParadaEquip(){
-    let equip=this.db.collection("Equipamentos")
-     equip.ref.where("descricao", "==", this.nomeEquip).get().then(result=>{
-      result.forEach(element =>{
-        this.tempoAcc=element.data().tempo
-        this.qtdParada= element.data().qtdParada
-        // console.log("tempo de parada   " + this.tempoAcc)
-        console.log("quantidade de parada dase de dados   " + this.qtdParada)
-        // console.log("calculo minuto "+ (this.tempoAcc / 1000)/60)   
-      })
-   })
+  // carregaQtdParadaEquip(){
+  //   let equip=this.db.collection("Equipamentos")
+  //    equip.ref.where("descricao", "==", this.nomeEquip).get().then(result=>{
+  //     result.forEach(element =>{
+  //       this.tempoAcc=element.data().tempo
+  //       this.qtdParada= element.data().qtdParada
+  //       // console.log("tempo de parada   " + this.tempoAcc)
+  //       console.log("quantidade de parada dase de dados   " + this.qtdParada)
+  //       // console.log("calculo minuto "+ (this.tempoAcc / 1000)/60)   
+  //     })
+  //  })
   
-  }
+  // }
 
-  async atualizaEquipamento(){
-    console.log("quantidade de parada dentro do atualiza   " + this.qtdParada)
+  // async atualizaEquipamento(){
+  //   console.log("quantidade de parada dentro do atualiza   " + this.qtdParada)
 
     
-      try{
-        this.equipamento.qtdParada = (this.qtdParada + this.somaQtd);
-        // var numberValue = Number(stringToConvert);
-      //  await this.equipServise.updateEquipamento(this.equipId, this.equipamento);
+  //     try{
+  //       this.equipamento.qtdParada = (this.qtdParada + this.somaQtd);
+  //       // var numberValue = Number(stringToConvert);
+  //     //  await this.equipServise.updateEquipamento(this.equipId, this.equipamento);
         
-      }catch(error){
-        this.presentToast('Erro ao tentar salvar os dados')
+  //     }catch(error){
+  //       this.presentToast('Erro ao tentar salvar os dados')
        
-      }
+  //     }
 
-  }
+  // }
+
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();

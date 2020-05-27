@@ -61,24 +61,21 @@
                 <ion-label><b>Tempo total de resposta:</b>{{equipamento.accResposta}}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label><b>Média tempo de resposta:</b>{{equipamento.accResposta / equipamento.qtdParada | number:0}}</ion-label>
+                <ion-label><b>Média tempo de resposta:</b>{{equipamento.accResposta / equipamento.qtdParada | number}}</ion-label>
             </ion-item>
 
-            <ion-item>
+            <ion-item *ngIf="equipamento.tempoAnterior !== 0 || equipamento.tempoAnterior ">
                 <ion-label><b>data falha anterior:</b>{{equipamento.tempoAnterior | date:'dd-MM-yyyy HH:mm'}}</ion-label>
             </ion-item>
 
-            <ion-item>
+            <ion-item *ngIf="equipamento.tempoAtual !== 0">
                 <ion-label><b>data ultima falha:</b>{{equipamento.tempoAtual | date:'dd-MM-yyyy HH:mm'}}</ion-label>
             </ion-item>
 
             <ion-item>
-                <ion-label><b>tempo entre falha</b>{{(equipamento.tempoEntreFalha / 1000) / 60 | number:0}}</ion-label>
+                <ion-label><b>tempo entre falha:</b>{{( equipamento.tempoEntreFalha / 1000) / 60 | number}}</ion-label>
                 <!-- this.result = ((this.teste - this.ordem.horaInicio)/ 1000 / 60).toFixed(2) -->
-
             </ion-item>
-
-
 
         </ion-card-header>
         <label>minimo:0</label>
@@ -86,7 +83,6 @@
             <ion-icon size="" color="warning" slot="end" name="analytics-sharp"></ion-icon>
             <ion-icon size="" color="success" slot="start" name="analytics-sharp"></ion-icon>
         </ion-range><label>Max:800 </label>
-
     </ion-card>
 
 
@@ -111,3 +107,25 @@
 
 
 </ion-content>
+
+<ion-item color="dark">
+    <ion-tabs color="dark">
+        <ion-tab-bar slot="bottom" color="dark">
+            <ion-tab-button (click)="rota('Aguardando...')">
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Espera</ion-label>
+                <ion-badge color="danger">{{contaAguarde}}</ion-badge>
+            </ion-tab-button>
+
+            <ion-tab-button (click)="showScreen('home-page')">
+                <ion-icon name="home" color="success"></ion-icon>Pagina Inicial
+            </ion-tab-button>
+
+            <ion-tab-button (click)="rota('Em Execução')">
+                <ion-icon name="document-text" color="success"></ion-icon>
+                <ion-label>Os Em Execução </ion-label>
+                <ion-badge color="warning">{{contaExecucao}}</ion-badge>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-item>

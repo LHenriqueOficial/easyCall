@@ -6,6 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { async } from '@angular/core/testing';
 import { element } from 'protractor';
 import { Area } from 'src/app/model/area';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-relatorio-equipamentos',
@@ -39,6 +40,10 @@ pendList: any=[];
   pendId: string;
   valor:number=9;
  dispCorteDobra: number;
+
+ valorConta: Number=0;
+  contaExecucao: Number=0;
+  contaAguarde: Number=0;
 //// variaveis para receber valor de disponibilidade de cada area 
   dispLaser: number;
   dispSilos: number;
@@ -56,6 +61,7 @@ pendList: any=[];
   constructor(
     private equipServise: EquipamentosService,
     private db: AngularFirestore,
+    private navCtrl: NavController,
 
   ) 
   { 
@@ -83,6 +89,26 @@ pendList: any=[];
   //       this.filtarLista(res)
   //     })
   // }
+
+  showScreen(nomeDaPagina: string){
+    this.navCtrl.navigateForward(nomeDaPagina)
+  };
+
+
+
+  contaOrdem(){
+
+    let conta=this.db.collection("Contagem")
+      conta.ref.where("id", "==", 1).get().then(result=>{
+       result.forEach(element =>{
+         this.valorConta=element.data().contaOs
+         this.contaExecucao= element.data().contaOsExecucao
+         this.contaAguarde= element.data().contaOsEmEspera
+  
+       })
+    })
+    
+  }
 
 
  carregadados() {

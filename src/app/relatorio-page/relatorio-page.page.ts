@@ -24,6 +24,9 @@ export class RelatorioPagePage implements OnInit {
   ordemList: any = []
   list: Ordem={};
   pesquisa: string;
+  valorConta: Number=0;
+  contaExecucao: Number=0;
+  contaAguarde: Number=0;
 
   constructor(
     private db: AngularFirestore,
@@ -36,6 +39,7 @@ export class RelatorioPagePage implements OnInit {
       this.ordem = data;
     
     })
+    this.contaOrdem();
    }
 
   ngOnInit() {
@@ -46,7 +50,19 @@ export class RelatorioPagePage implements OnInit {
   };
 
 
+  contaOrdem(){
 
+    let conta=this.db.collection("Contagem")
+      conta.ref.where("id", "==", 1).get().then(result=>{
+       result.forEach(element =>{
+         this.valorConta=element.data().contaOs
+         this.contaExecucao= element.data().contaOsExecucao
+         this.contaAguarde= element.data().contaOsEmEspera
+  
+       })
+    })
+    
+  }
   
  
 }

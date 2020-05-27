@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { OrdemService } from '../services/ordem.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-os-manutencaopage',
@@ -15,15 +16,20 @@ export class OsManutencaopagePage implements OnInit {
   public ordem = new Array<Ordem>();
   private loading: any;
   private ordemSubscription: Subscription
+  equipId: string;
+  nomeEquip: any;
   
   constructor(
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private toastCrl: ToastController,
     private ordemService: OrdemService,
+    private db: AngularFirestore
     ) { 
+
       this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
         this.ordem = data;
+        
       })
       
 
@@ -36,5 +42,10 @@ export class OsManutencaopagePage implements OnInit {
   ngOnDestroy() {
     if (this.ordemSubscription) this.ordemSubscription.unsubscribe();
   }
+
+
+
+
+
 
 }

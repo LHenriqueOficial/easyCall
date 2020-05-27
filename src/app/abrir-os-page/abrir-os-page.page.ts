@@ -168,7 +168,11 @@ this.ordem.cor="danger"
 
       this.equipamento.qtdParada = Number(this.qtdParada + this.somaQtdPara)
       // soma numero de Ordem de serviço
+      if(this.tempnovo == 0){
+        this.equipamento.tempoAnterior = this.ordem.horaInicio
+      }else{
       this.equipamento.tempoAnterior = this.tempnovo;
+      }
       this.equipamento.tempoAtual = this.ordem.horaInicio;
       Number( this.equipamento.tempoEntreFalha = this.ordem.horaInicio - this.equipamento.tempoAnterior)
       this.equipService.updateEquipamento(this.equipId, this.equipamento)
