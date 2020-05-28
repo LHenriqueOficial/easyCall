@@ -63,10 +63,13 @@ this.carregaStatus(this.status)
 }else if(this.status == 'Finalizada'){
   this.carregaStatus(this.status)
 }
-else
-  this.status = "padrao"
-
+else{
+  this.status = "padrao";
   this.carregaDados();
+}
+  
+
+  
 
   
 

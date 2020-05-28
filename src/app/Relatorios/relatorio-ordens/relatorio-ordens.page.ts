@@ -31,6 +31,7 @@ export class RelatorioOrdensPage implements OnInit {
   modelo:string;
   calculoTempo: string;
   tempoTotaldeServico: any;
+  contaFinalizada: number;
 
 
 
@@ -65,9 +66,11 @@ contaOrdem(){
   let conta=this.db.collection("Contagem")
     conta.ref.where("id", "==", 1).get().then(result=>{
      result.forEach(element =>{
-       this.valorConta=element.data().contaOs
-       this.contaExecucao= element.data().contaOsExecucao
-       this.contaAguarde= element.data().contaOsEmEspera
+
+       this.valorConta=element.data().contaOs;
+       this.contaExecucao= element.data().contaOsExecucao;
+       this.contaAguarde= element.data().contaOsEmEspera;
+       this.contaFinalizada = element.data().contaOsFinalizada;
 
      })
   })
@@ -105,9 +108,9 @@ calcTempoResposta(){
     this.tempoTotaldeServico = this.valorTempoServico.toFixed(2)
     this.calcTempo += Number(element.data().tempoResposta)
     this.calculoTempo = this.calcTempo.toFixed(2);
-     this.mediaResp = Number(this.calcTempo / this.valorConta).toFixed(2)
+     this.mediaResp = Number(this.calcTempo / this.contaFinalizada).toFixed(2)
 
-     this.mediaServ = Number(this.valorTempoServico / this.valorConta).toFixed(2)
+     this.mediaServ = Number(this.valorTempoServico / this.contaFinalizada).toFixed(2)
 
      this.soma = Number((element.data().horaInicio - element.data().horaFinalização)/ 1000 /60).toFixed(2)
      console.log("teste contagem "+ this.soma )

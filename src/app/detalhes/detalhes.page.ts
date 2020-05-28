@@ -50,6 +50,7 @@ export class DetalhesPage implements OnInit {
   contaespera: number;
   subtraiOs: number =1;
   contaexecucao:number;
+  contaFinalizada:number;
   
 
   constructor(
@@ -181,7 +182,7 @@ carregaTime(){
     if(this.ordemId){
       try{
         this.ordem.horaInicioExecucao = new Date().getTime();
-        this.ordem.status ='Em execução'
+        this.ordem.status ='Em Execução'
         this.ordem.cor = 'warning'
         this.ordem.tempoResposta = this.result;
         this.equipamento.accResposta = this.accResp + Number(this.result)
@@ -214,6 +215,7 @@ carregaTime(){
         await this.ordemService.updateOrdem(this.ordemId, this.ordem);
         this.equipamento.tempo = this.tempoAcc + Number(this.result);
         this.contagem.contaOsExecucao = Number(this.contaexecucao - this.subtraiOs)
+        this.contagem.contaOsFinalizada = Number(this.contaFinalizada + this.subtraiOs)
       this.contaServise.updateContagem(this.contaId, this.contagem)
         // var numberValue = Number(stringToConvert);
         this.equipServise.updateEquipamento(this.equipId, this.equipamento);
@@ -245,6 +247,7 @@ carregaTime(){
        this.valorConta=element.data().contaOs
        this.contaespera=element.data().contaOsEmEspera
        this.contaexecucao=element.data().contaOsExecucao
+       this.contaFinalizada = element.data().contaOsFinalizada
        console.log("valor conta  " + this.valorConta)
      })
   })

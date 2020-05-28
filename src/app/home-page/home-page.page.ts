@@ -29,7 +29,7 @@ export class HomePagePage implements OnInit {
     public roter : Router,
     private db: AngularFirestore) { 
 
-
+      this.contaOrdem();
     }
 
   ngOnInit() {

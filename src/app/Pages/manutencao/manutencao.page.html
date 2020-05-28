@@ -29,21 +29,20 @@
 <ion-item color="dark">
     <ion-tabs color="dark">
         <ion-tab-bar slot="bottom" color="dark">
-            <ion-tab-button (click)="showScreen('status-os-page')">
+            <ion-tab-button (click)="rota('Aguardando...')">
                 <ion-icon name="document-text" color="success"></ion-icon>
                 <ion-label>Os Em Espera</ion-label>
-                <ion-badge color="danger">6</ion-badge>
+                <ion-badge color="danger">{{contaAguarde}}</ion-badge>
             </ion-tab-button>
 
             <ion-tab-button (click)="showScreen('home-page')">
                 <ion-icon name="home" color="success"></ion-icon>Pagina Inicial
-
             </ion-tab-button>
 
-            <ion-tab-button>
+            <ion-tab-button (click)="rota('Em Execução')">
                 <ion-icon name="document-text" color="success"></ion-icon>
                 <ion-label>Os Em Execução </ion-label>
-                <ion-badge color="warning">6</ion-badge>
+                <ion-badge color="warning">{{contaExecucao}}</ion-badge>
             </ion-tab-button>
 
 

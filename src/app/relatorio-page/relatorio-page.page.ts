@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 import { FirebaseFirestore } from 'angularfire2';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-relatorio-page',
@@ -32,7 +33,8 @@ export class RelatorioPagePage implements OnInit {
     private db: AngularFirestore,
     private firestore: AngularFirestore,
     private ordemService : OrdemService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private roter: Router,
     
   ) {
     this.ordemSubscription = this.ordemService.getOrdens().subscribe(data =>{
@@ -48,6 +50,11 @@ export class RelatorioPagePage implements OnInit {
   showScreen(nomeDaPagina: string){
     this.navCtrl.navigateForward(nomeDaPagina)
   };
+
+  rota(valor: string){
+    this.roter.navigate(['/status-os-page', valor])
+  
+  }
 
 
   contaOrdem(){
