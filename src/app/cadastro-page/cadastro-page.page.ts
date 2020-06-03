@@ -10,6 +10,7 @@ import { SetorService } from './../services/setor.service';
 import { Funcao } from './../model/funcao';
 import { FuncaoService } from './../services/funcao.service';
 
+
 @Component({
   selector: 'app-cadastro-page',
   templateUrl: './cadastro-page.page.html',
@@ -24,6 +25,11 @@ export class CadastroPagePage implements OnInit {
   public funcao: Funcao={};
   public setor: Setor= {};
   public usuario: Usuarios= {};
+  public listSetor: Array<string> = ['Solda', 'Pintura Automática', 'Montagem', 'Silos', 'Corte e Dobra',
+'Pintura Manual', 'Corte e Perfil','Expedição', 'Montagem Externa', 'Administrativo','Manutenção','Gerência']
+ public listFuncao: Array<string>= ['Operador 1','Operador 2','Operador 3', 'Montador 1', 'Montador 2', 'Montador 3','Operador 3','Auxiliar de Produção','Lider de Produção',
+'Programador de Manutenção', 'Auxiliar Adm','Técnico de Segurança','Supervisor de Produção','Eletricista de Manutenção',
+'Gerente Industrial','Auxiliar de Manutenção', 'Diretor Industrial', 'Mecânico de Manutenção','Robotista','Torneiro','']
   
 
 

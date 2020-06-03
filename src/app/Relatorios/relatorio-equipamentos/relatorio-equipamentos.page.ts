@@ -7,6 +7,7 @@ import { async } from '@angular/core/testing';
 import { element } from 'protractor';
 import { Area } from 'src/app/model/area';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-relatorio-equipamentos',
@@ -62,6 +63,7 @@ pendList: any=[];
     private equipServise: EquipamentosService,
     private db: AngularFirestore,
     private navCtrl: NavController,
+    private roter: Router,
 
   ) 
   { 
@@ -69,6 +71,7 @@ pendList: any=[];
       this.equipamentos = data;
     })
     this.carregadados();
+    this.contaOrdem();
 
 
   }
@@ -94,7 +97,10 @@ pendList: any=[];
     this.navCtrl.navigateForward(nomeDaPagina)
   };
 
-
+  rota(valor: string){
+    this.roter.navigate(['/status-os-page', valor])
+  
+  }
 
   contaOrdem(){
 

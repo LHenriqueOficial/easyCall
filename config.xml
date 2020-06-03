@@ -110,6 +110,6 @@
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
     </platform>
-    <engine name="android" spec="7.1.4" />
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="6.4.0" />
+    <engine name="android" spec="7.1.4" />
 </widget>

@@ -39,14 +39,14 @@
         <ion-label style=" color: black;">
             <ion-icon name="location"></ion-icon>Setor:</ion-label>
         <ion-select style=" color: black;" okText="Ok" cancelText="Sair" [(ngModel)]="usuario.setor">
-            <ion-select-option *ngFor="let setor of setores" [value]="setor.descricao">{{ setor.descricao }}</ion-select-option>
+            <ion-select-option *ngFor="let setor of listSetor" [value]="setor">{{setor }}</ion-select-option>
         </ion-select>
     </ion-item>
 
     <ion-item color="success">
         <ion-label color="dark"><b>Função:</b></ion-label>
         <ion-select style=" color: black;" okText="Ok" cancelText="Sair" [(ngModel)]="usuario.funcao">
-            <ion-select-option *ngFor="let funcao of funcoes" [value]="funcao.descricao">{{funcao.descricao }}</ion-select-option>
+            <ion-select-option *ngFor="let funcao of listFuncao" [value]="funcao">{{funcao}}</ion-select-option>
         </ion-select>
     </ion-item>
     <br>

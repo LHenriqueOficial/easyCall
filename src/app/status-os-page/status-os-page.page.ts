@@ -64,7 +64,7 @@ this.carregaStatus(this.status)
   this.carregaStatus(this.status)
 }
 else{
-  this.status = "padrao";
+  this.status = "";
   this.carregaDados();
 }
   
